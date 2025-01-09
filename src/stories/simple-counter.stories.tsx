@@ -1,3 +1,5 @@
+import type { Story } from "@ladle/react"
 import "../main"
 
-export const SimpleCounter = () => <simple-counter></simple-counter>
+export const SimpleCounter: Story = () => <simple-counter></simple-counter>
+SimpleCounter.storyName = "default"

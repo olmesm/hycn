@@ -1,4 +1,4 @@
-# HYCN
+# 🪻 HYCN
 
 [hybrids.js] component build system, exposed via [ladle.dev].
 
