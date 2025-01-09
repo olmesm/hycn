@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "book": "ladle serve",
-    "build": "tsc -b && vite build",
+    "dev": "ladle serve",
+    "build": "ladle build",
+    "_build": "tsc -b && vite build",
+    "fmt": "prettier -w src",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "fmt": "prettier -w src"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ladle/react": "^5.0.1",
