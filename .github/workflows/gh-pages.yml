@@ -27,7 +27,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
-      - run: bun build -- --base olmesm.github.io/hycn
+      - run: bun run build --base /hycn
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
