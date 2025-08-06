@@ -10,7 +10,7 @@
     "build": "bun build:types && bun build:book",
     "build:book": "ladle build",
     "build:types": "WATCH=false bun scripts/ts/gen-types.ts",
-    "_build": "tsc -b && vite build",
+    "_build:components": "tsc -b && vite build",
     "fmt": "prettier -w .",
     "lint": "eslint .",
     "preview": "vite preview"
