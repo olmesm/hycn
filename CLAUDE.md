@@ -30,3 +30,4 @@ bun lint          # Lint code with ESLint
 - Web components must start with lowercase letter and contain a hyphen
 - Type generation script watches for changes and updates `src/globals.d.ts`
 - Components are automatically registered as web components
+- We need to always import the main.tsx file in a story
