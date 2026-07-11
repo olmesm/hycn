@@ -1,0 +1,30 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Tree" />
+
+# Tree
+
+`hycn-tree` renders hierarchical data with expansion, selection, roving focus, and complete tree keyboard traversal.
+
+## JavaScript API
+
+```js
+const tree = document.querySelector("hycn-tree")
+tree.items = [{
+  id: "src",
+  label: "src",
+  children: [{ id: "index", label: "index.ts" }],
+}]
+tree.expanded = ["src"]
+```
+
+| Property | Attribute | Default | Purpose |
+| --- | --- | --- | --- |
+| `items` | — | `[]` | Nested `{ id, label, disabled?, children? }` nodes. |
+| `expanded` | — | `[]` | Expanded node IDs. |
+| `selectedId` | `selected-id` | `""` | Selected node ID. |
+| `label` | `label` | `"Tree"` | Accessible tree name. |
+
+Events: `hycn-toggle` contains `{ id, expanded }`; `hycn-change` contains `{ id, label }`. Parts: `tree`, `item`, `toggle`, `spacer`, `label`.
+
+ArrowUp and ArrowDown traverse visible nodes. ArrowRight expands or enters a branch; ArrowLeft collapses or returns to its parent. Home and End jump to the bounds. Enter or Space selects.

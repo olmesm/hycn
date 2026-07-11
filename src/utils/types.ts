@@ -1,10 +1,15 @@
-import { type Component as HybridsComponent } from "hybrids"
+import type { Component as HybridsComponent } from "hybrids"
 
-export type DefineComponent<T> = {
-  Props: T
-  Component: Omit<HybridsComponent<T>, "tag"> & { tag?: string }
-  Definition: Partial<HybridsComponent<T>> & {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    children?: any
-  }
+export type DefineComponent<Props extends object> = {
+	Props: Props & HTMLElement
+	Element: Props & HTMLElement
+	Component: HybridsComponent<Props>
+	Definition: Partial<Props> & {
+		className?: string
+		id?: string
+		slot?: string
+		style?: Record<string, string | number>
+	}
 }
+
+export type ComponentEvent<Detail> = CustomEvent<Detail>

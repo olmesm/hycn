@@ -1,0 +1,521 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "./README.md",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-combobox.js",
+      "declarations": [
+        {
+          "description": "An editable combobox with filtered listbox options and keyboard selection.",
+          "members": [
+            {
+              "default": "[]",
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "ComboboxOption[]"
+              }
+            },
+            {
+              "attribute": "value",
+              "default": "\"\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "query",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "attribute": "label",
+              "default": "\"Choose an option\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "attribute": "placeholder",
+              "default": "\"\"",
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "attribute": "disabled",
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "attribute": "open",
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the editable query changes.",
+              "name": "hycn-input",
+              "type": {
+                "text": "CustomEvent<{ query: string }>"
+              }
+            },
+            {
+              "description": "Emitted after an option is selected.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ label: string; value: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Root layout container.",
+              "name": "base"
+            },
+            {
+              "description": "Native combobox input.",
+              "name": "input"
+            },
+            {
+              "description": "Popup listbox.",
+              "name": "listbox"
+            },
+            {
+              "description": "An option row.",
+              "name": "option"
+            },
+            {
+              "description": "Empty-results message.",
+              "name": "empty"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Listbox background color.",
+              "name": "--hycn-combobox-background"
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnCombobox",
+          "tagName": "hycn-combobox"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-dialog.js",
+      "declarations": [
+        {
+          "description": "A modal or non-modal dialog with focus containment and restoration.",
+          "members": [
+            {
+              "attribute": "open",
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "true",
+              "kind": "field",
+              "name": "modal",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "attribute": "label",
+              "default": "\"Dialog\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "true",
+              "kind": "field",
+              "name": "closeOnBackdrop",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "parameters": [
+                {
+                  "name": "reason",
+                  "optional": true,
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Cancelable event emitted before Escape dismissal.",
+              "name": "hycn-cancel",
+              "type": {
+                "text": "CustomEvent<{ reason: string }>"
+              }
+            },
+            {
+              "description": "Emitted after the dialog closes.",
+              "name": "hycn-close",
+              "type": {
+                "text": "CustomEvent<{ reason: string }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Dialog content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Viewport backdrop.",
+              "name": "backdrop"
+            },
+            {
+              "description": "Dialog surface.",
+              "name": "panel"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Panel background.",
+              "name": "--hycn-dialog-background"
+            },
+            {
+              "description": "Panel foreground.",
+              "name": "--hycn-dialog-color"
+            },
+            {
+              "description": "Minimum viewport gutter.",
+              "name": "--hycn-dialog-gutter"
+            },
+            {
+              "description": "Panel padding.",
+              "name": "--hycn-dialog-padding"
+            },
+            {
+              "description": "Panel corner radius.",
+              "name": "--hycn-dialog-radius"
+            },
+            {
+              "description": "Backdrop stacking level.",
+              "name": "--hycn-dialog-z-index"
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnDialog",
+          "tagName": "hycn-dialog"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-menu.js",
+      "declarations": [
+        {
+          "description": "A trigger-controlled popup menu with managed keyboard focus.",
+          "members": [
+            {
+              "attribute": "open",
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "attribute": "label",
+              "default": "\"Menu\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when a menu item is selected.",
+              "name": "hycn-select",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Button that controls the menu.",
+              "name": "trigger"
+            },
+            {
+              "description": "Menu items.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Popup menu surface.",
+              "name": "menu"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Popup background.",
+              "name": "--hycn-menu-background"
+            },
+            {
+              "description": "Popup border color.",
+              "name": "--hycn-menu-border"
+            },
+            {
+              "description": "Popup corner radius.",
+              "name": "--hycn-menu-radius"
+            },
+            {
+              "description": "Popup stacking level.",
+              "name": "--hycn-menu-z-index"
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnMenu",
+          "tagName": "hycn-menu"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-tabs.js",
+      "declarations": [
+        {
+          "description": "A slotted tabs interface with roving focus and automatic or manual activation.",
+          "members": [
+            {
+              "attribute": "selected-index",
+              "default": "0",
+              "kind": "field",
+              "name": "selectedIndex",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "attribute": "orientation",
+              "default": "\"horizontal\"",
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              }
+            },
+            {
+              "attribute": "activation",
+              "default": "\"automatic\"",
+              "kind": "field",
+              "name": "activation",
+              "type": {
+                "text": "\"automatic\" | \"manual\""
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted after user-driven tab selection.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ index: number }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Tab controls.",
+              "name": "tab"
+            },
+            {
+              "description": "Panels paired by DOM order.",
+              "name": "panel"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "ARIA tablist container.",
+              "name": "tablist"
+            },
+            {
+              "description": "Panel container.",
+              "name": "panels"
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnTabs",
+          "tagName": "hycn-tabs"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-tree.js",
+      "declarations": [
+        {
+          "description": "A hierarchical tree with expansion, selection, and roving keyboard focus.",
+          "members": [
+            {
+              "default": "[]",
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "TreeItem[]"
+              }
+            },
+            {
+              "default": "[]",
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "string[]"
+              }
+            },
+            {
+              "attribute": "selected-id",
+              "default": "\"\"",
+              "kind": "field",
+              "name": "selectedId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "attribute": "label",
+              "default": "\"Tree\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when a branch changes.",
+              "name": "hycn-toggle",
+              "type": {
+                "text": "CustomEvent<{ expanded: boolean; id: string }>"
+              }
+            },
+            {
+              "description": "Emitted when a node is selected.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ id: string; label: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "ARIA tree container.",
+              "name": "tree"
+            },
+            {
+              "description": "A visible tree item.",
+              "name": "item"
+            },
+            {
+              "description": "Branch expansion control.",
+              "name": "toggle"
+            },
+            {
+              "description": "Leaf alignment spacer.",
+              "name": "spacer"
+            },
+            {
+              "description": "Tree item label.",
+              "name": "label"
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnTree",
+          "tagName": "hycn-tree"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/hycn-visually-hidden.js",
+      "declarations": [
+        {
+          "description": "Visually hides slotted content while keeping it available to assistive technology.",
+          "slots": [
+            {
+              "description": "Accessible-only content.",
+              "name": ""
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "HycnVisuallyHidden",
+          "tagName": "hycn-visually-hidden"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "components/simple-counter.js",
+      "declarations": [
+        {
+          "description": "A minimal stateful counter used as a Hybrids authoring example.",
+          "members": [
+            {
+              "attribute": "count",
+              "default": "0",
+              "kind": "field",
+              "name": "count",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "kind": "custom-element-definition",
+          "name": "SimpleCounter",
+          "tagName": "simple-counter"
+        }
+      ]
+    }
+  ]
+}

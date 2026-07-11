@@ -1,0 +1,40 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Dialog" />
+
+# Dialog
+
+`hycn-dialog` presents modal or non-modal content while managing initial focus, Escape dismissal, focus containment, and focus restoration.
+
+## Usage
+
+```html
+<button id="open" type="button">Open settings</button>
+<hycn-dialog label="Settings">
+  <h2>Settings</h2>
+  <button type="button">Save</button>
+</hycn-dialog>
+<script type="module">
+  import "hycn/register"
+  const dialog = document.querySelector("hycn-dialog")
+  open.onclick = () => { dialog.open = true }
+</script>
+```
+
+## API
+
+| Property | Attribute | Default | Purpose |
+| --- | --- | --- | --- |
+| `open` | `open` | `false` | Shows the dialog. |
+| `modal` | — | `true` | Enables modal focus containment. |
+| `label` | `label` | `"Dialog"` | Accessible dialog name. |
+| `closeOnBackdrop` | `close-on-backdrop` | `true` | Allows backdrop dismissal. |
+| `close(reason)` | — | — | Closes and emits `hycn-close`. |
+
+Events: `hycn-cancel` is cancelable and fires before Escape dismissal. `hycn-close` contains `{ reason }`.
+
+Slot: default content. Parts: `backdrop`, `panel`. Theme with `--hycn-dialog-background`, `--hycn-dialog-color`, `--hycn-dialog-gutter`, `--hycn-dialog-padding`, `--hycn-dialog-radius`, and `--hycn-dialog-z-index`.
+
+## Accessibility
+
+Supply a concise `label`. Put the most appropriate first action first in DOM order or mark it with `autofocus`. Escape closes unless `hycn-cancel` is prevented, and focus returns to the element that opened the dialog.

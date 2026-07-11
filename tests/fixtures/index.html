@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HYCN Playwright fixtures</title>
+		<style>
+			body { font-family: system-ui, sans-serif; margin: 2rem; }
+			.fixture { margin-block: 2rem; }
+			hycn-menu > :not([slot]) { background: Canvas; border: 0; padding: .5rem; text-align: start; }
+			hycn-tabs > [slot="tab"] { padding: .5rem .75rem; }
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>HYCN component fixtures</h1>
+
+			<section class="fixture" id="dialog-fixture">
+				<h2>Dialog</h2>
+				<button id="open-dialog" type="button">Open dialog</button>
+				<hycn-dialog label="Account settings">
+					<h3>Account settings</h3>
+					<button id="dialog-first" type="button">Save</button>
+					<button id="dialog-close" type="button">Cancel</button>
+				</hycn-dialog>
+			</section>
+
+			<section class="fixture">
+				<h2>Tabs</h2>
+				<hycn-tabs>
+					<button slot="tab" type="button">Overview</button>
+					<button slot="tab" type="button">API</button>
+					<div slot="panel">Overview panel</div>
+					<div slot="panel">API panel</div>
+				</hycn-tabs>
+			</section>
+
+			<section class="fixture">
+				<h2>Menu</h2>
+				<hycn-menu label="Actions">
+					<button slot="trigger" type="button">Actions</button>
+					<button data-value="edit" type="button">Edit</button>
+					<button data-value="duplicate" type="button">Duplicate</button>
+				</hycn-menu>
+			</section>
+
+			<section class="fixture">
+				<h2>Combobox</h2>
+				<hycn-combobox label="Country" placeholder="Select a country"></hycn-combobox>
+			</section>
+
+			<section class="fixture">
+				<h2>Tree</h2>
+				<hycn-tree label="Project files"></hycn-tree>
+			</section>
+		</main>
+
+		<script type="module">
+			import "/dist/register.js"
+
+			await Promise.all([
+				"hycn-dialog",
+				"hycn-tabs",
+				"hycn-menu",
+				"hycn-combobox",
+				"hycn-tree",
+			].map((tag) => customElements.whenDefined(tag)))
+
+			const dialog = document.querySelector("hycn-dialog")
+			document.querySelector("#open-dialog").addEventListener("click", () => { dialog.open = true })
+			document.querySelector("#dialog-close").addEventListener("click", () => dialog.close("button"))
+
+			const combobox = document.querySelector("hycn-combobox")
+			combobox.options = [
+				{ label: "France", value: "fr" },
+				{ label: "Spain", value: "es" },
+				{ disabled: true, label: "Unavailable", value: "none" },
+			]
+
+			const tree = document.querySelector("hycn-tree")
+			tree.items = [
+				{ id: "src", label: "src", children: [
+					{ id: "components", label: "components" },
+					{ id: "index", label: "index.ts" },
+				] },
+				{ id: "readme", label: "README.md" },
+			]
+		</script>
+	</body>
+</html>

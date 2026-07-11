@@ -1,33 +1,117 @@
 # 🪻 HYCN
 
-[hybrids.js] component build system, exposed via [ladle.dev].
+Accessible, framework-independent Web Components built with [Hybrids](https://hybrids.js.org/).
 
-## Features
+HYCN publishes unbundled standard ES modules, TypeScript declarations, a Custom Elements Manifest, side-effect-free component definitions, and explicit registration entry points. Interactive documentation is built with [Ladle](https://ladle.dev/).
 
-- [x] webcomponents via [hybrids.js]
-- [x] "storybook" via [ladle.dev]
-- [x] auto-generate typescript declarations for the webcomponents
-- [ ] webcomponent library for import
+## Components
 
-## Workflow
+- `hycn-dialog` — modal focus management, cancellation, dismissal, and restoration
+- `hycn-tabs` — automatic or manual activation with horizontal and vertical navigation
+- `hycn-menu` — trigger coordination, popup focus, selection, and outside dismissal
+- `hycn-combobox` — typed filtering, active option management, and selection
+- `hycn-tree` — hierarchical expansion, traversal, and selection
+- `hycn-visually-hidden` — visually hidden accessible content
 
-**NOTE** Webcomponents [must start with a lowercase letter and contain a hyphen](https://html.spec.whatwg.org/multipage/custom-elements.html#valid-custom-element-name)
+`simple-counter` remains as the small Hybrids authoring example.
 
-1. Components are declared in `./src/components/<component-name>.tsx`
-1. `gen-types.ts` script watches for changes and will generate the webcomponent declaration and type for the component in `src/globals.d.ts`
-1. Component docs/stories are declared in `./src/stories/<component-name>.stories.tsx`
+## Installation
 
-See [ladle.dev] and [hybrids.js] for more info
+```sh
+bun add hycn
+```
+
+Register every element once in an application entry point:
+
+```ts
+import "hycn/register"
+```
+
+For a smaller registration surface, import only what the application uses:
+
+```ts
+import { registerDialog, registerTabs } from "hycn"
+
+registerDialog()
+registerTabs()
+```
+
+Definitions are exported separately for advanced Hybrids composition:
+
+```ts
+import { dialog } from "hycn"
+
+console.log(dialog.tag) // hycn-dialog
+```
+
+Individual component modules are also available:
+
+```ts
+import { component, register } from "hycn/components/hycn-combobox"
+```
+
+## Example
+
+```html
+<hycn-tabs>
+  <button slot="tab" type="button">Overview</button>
+  <button slot="tab" type="button">API</button>
+  <section slot="panel">Overview content</section>
+  <section slot="panel">API content</section>
+</hycn-tabs>
+```
+
+Complex data is assigned as a property rather than serialized into attributes:
+
+```ts
+const combobox = document.querySelector("hycn-combobox")
+
+combobox.options = [
+  { label: "France", value: "fr" },
+  { label: "Spain", value: "es" },
+]
+```
+
+## Public API conventions
+
+- Primitive state may be supplied through properties or documented reflected attributes.
+- Structured data such as combobox options and tree items is property-only.
+- Component events bubble across shadow boundaries and use the `hycn-*` prefix.
+- Light-DOM composition uses named slots.
+- Styling uses documented `part` names and `--hycn-*` custom properties.
+- Importing `hycn` does not register elements. Import `hycn/register` or call registration functions explicitly.
+
+The Ladle documentation includes the complete property, attribute, event, slot, part, keyboard, and accessibility contract for each component.
 
 ## Development
 
-```bash
-bun install
+Install dependencies and start Ladle with the generated JSX types watcher:
 
-bun dev
+```sh
+bun install
+bun run dev
 ```
 
-<!-- MD REFS -->
+Run all checks:
 
-[hybrids.js]: https://hybrids.js.org/
-[ladle.dev]: https://ladle.dev/
+```sh
+bun run check
+```
+
+Useful focused commands:
+
+```sh
+bun run check:lint
+bun run check:types
+bun run check:package
+bun run check:test
+bun run build
+```
+
+Playwright exercises the public DOM interface in Chromium, Firefox, and WebKit. The suite covers registration, keyboard navigation, focus behavior, state reflection, selection, and automated axe accessibility analysis.
+
+## Publishing model
+
+`bun run build:library` emits unbundled ESM, declarations, declaration maps, and source maps into `dist/`. The build intentionally leaves bundling and minification to the consuming application, following [Open Web Components publishing guidance](https://open-wc.org/guides/developing-components/publishing/).
+
+The package remains marked `private` until its final registry name and release policy are chosen. Remove that flag only as part of an intentional release.

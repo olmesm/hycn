@@ -4,8 +4,46 @@ import { Meta } from "@ladle/react"
 
 # 🪻 HYCN
 
-[hybrids.js](https://hybrids.js.org/) webcomponent library, hosted via [ladle.dev](https://ladle.dev).
+[Hybrids](https://hybrids.js.org/) web component library, documented with [Ladle](https://ladle.dev).
 
-...more to come
+HYCN provides accessible, framework-independent custom elements with typed properties, events, slots, CSS parts, and explicit registration entry points.
 
-[github](https://github.com/olmesm/hycn)
+## Install
+
+```sh
+bun add hycn
+```
+
+Register the full library once:
+
+```js
+import "hycn/register"
+```
+
+Or register only what an application uses:
+
+```js
+import { registerDialog } from "hycn"
+registerDialog()
+```
+
+Component definitions are also exported without registration side effects, which supports advanced Hybrids composition and custom registration strategies.
+
+## Components
+
+- Dialog — modal focus and dismissal
+- Tabs — roving keyboard selection
+- Menu — trigger/popup coordination
+- Combobox — filtering and active-descendant selection
+- Tree — hierarchical navigation and selection
+- Visually hidden — accessible-only content
+
+## Browser and accessibility policy
+
+Every interactive component is exercised through its public DOM interface in Chromium, Firefox, and WebKit. The suite verifies keyboard behavior, focus management, ARIA state, emitted events, package registration, and automated axe results.
+
+## Styling
+
+Components expose stable `part` names and documented `--hycn-*` custom properties. Internal shadow markup is not part of the public API.
+
+[GitHub](https://github.com/olmesm/hycn)

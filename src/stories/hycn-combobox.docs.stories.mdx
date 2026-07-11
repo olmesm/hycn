@@ -1,0 +1,32 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Combobox" />
+
+# Combobox
+
+`hycn-combobox` filters a typed option collection and exposes the ARIA combobox/listbox interaction model.
+
+## JavaScript API
+
+```js
+const combobox = document.querySelector("hycn-combobox")
+combobox.options = [
+  { label: "France", value: "fr" },
+  { label: "Spain", value: "es" },
+]
+combobox.addEventListener("hycn-change", ({ detail }) => console.log(detail.value))
+```
+
+| Property | Attribute | Default | Purpose |
+| --- | --- | --- | --- |
+| `options` | — | `[]` | Array of `{ label, value, disabled? }`. |
+| `value` | `value` | `""` | Selected option value. |
+| `query` | — | `""` | Current editable text. |
+| `label` | `label` | `"Choose an option"` | Accessible input name. |
+| `placeholder` | `placeholder` | `""` | Input placeholder. |
+| `disabled` | `disabled` | `false` | Disables interaction. |
+| `open` | `open` | `false` | Controls listbox visibility. |
+
+Events: `hycn-input` contains `{ query }`; `hycn-change` contains `{ label, value }`. Parts: `base`, `input`, `listbox`, `option`, `empty`.
+
+Arrow keys move the active option, Enter selects it, Escape closes, and Tab accepts normal page navigation.

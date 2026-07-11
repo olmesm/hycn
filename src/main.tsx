@@ -1,22 +1,9 @@
 import "./index.css"
-import { define, debug } from "hybrids"
+import { debug } from "hybrids"
+import "./register"
 
 if (import.meta.env.DEV) {
-  debug()
+	debug()
 
-  console.info(
-    "Components",
-    import.meta.glob(["./components/**/*.tsx"], {
-      eager: true,
-      import: "component",
-    }),
-  )
+	console.info("HYCN components registered")
 }
-
-define.from(
-  import.meta.glob(["./components/**/*.tsx"], {
-    eager: true,
-    import: "component",
-  }),
-  { root: "components" },
-)

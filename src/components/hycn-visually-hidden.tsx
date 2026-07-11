@@ -1,8 +1,9 @@
 import { html } from "hybrids"
-import { DefineComponent } from "../utils/types"
-import { css } from "../utils/string-utils"
+import { registerComponent } from "../utils/register.js"
+import { css } from "../utils/string-utils.js"
+import type { DefineComponent } from "../utils/types.js"
 
-export type Type = DefineComponent<{}>
+export type Type = DefineComponent<object>
 
 const inlineStyles = css`
   span {
@@ -20,5 +21,8 @@ const inlineStyles = css`
 `
 
 export const component: Type["Component"] = {
-  render: () => html`<span><slot></slot></span>`.style(inlineStyles),
+	tag: "hycn-visually-hidden",
+	render: () => html`<span><slot></slot></span>`.style(inlineStyles),
 }
+
+export const register = () => registerComponent(component)

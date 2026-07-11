@@ -1,42 +1,81 @@
 {
-  "name": "hycn",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "concurrently bun:dev:*",
-    "dev:book": "ladle serve",
-    "dev:types": "bun --watch scripts/ts/gen-types.ts",
-    "build": "bun build:types && bun build:book",
-    "build:book": "ladle build",
-    "build:types": "WATCH=false bun scripts/ts/gen-types.ts",
-    "_build": "tsc -b && vite build",
-    "fmt": "prettier -w .",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@ladle/react": "^5.0.1",
-    "hybrids": "^9.1.9",
-    "lodash-es": "^4.17.21",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@types/bun": "^1.1.16",
-    "@types/lodash-es": "^4.17.12",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "concurrently": "^9.1.2",
-    "eslint": "^9.17.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "prettier": "^3.4.2",
-    "typescript": "~5.6.2",
-    "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
-  }
+	"name": "hycn",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"description": "Accessible web components built with Hybrids.",
+	"types": "./dist/index.d.ts",
+	"customElements": "./custom-elements.json",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./register": {
+			"types": "./dist/register.d.ts",
+			"import": "./dist/register.js"
+		},
+		"./components/*": {
+			"types": "./dist/components/*.d.ts",
+			"import": "./dist/components/*.js"
+		}
+	},
+	"files": [
+		"dist",
+		"custom-elements.json",
+		"README.md"
+	],
+	"sideEffects": [
+		"./dist/register.js"
+	],
+	"overrides": {
+		"@babel/core": "7.29.7",
+		"@babel/helpers": "7.29.7",
+		"@babel/runtime": "7.29.7",
+		"esbuild": "0.28.1",
+		"koa": "2.16.4",
+		"mdast-util-to-hast": "13.2.1",
+		"picomatch": "4.0.5",
+		"postcss": "8.5.16",
+		"rollup": "4.62.2",
+		"vite": "8.1.4"
+	},
+	"scripts": {
+		"dev": "bun run --parallel 'dev:*'",
+		"dev:book": "ladle serve",
+		"dev:types": "bun --watch scripts/ts/gen-types.ts",
+		"build": "bun run build:library && bun run build:book",
+		"build:book": "ladle build",
+		"build:library": "bun scripts/clean-library.ts && bun run build:types && tsc -p tsconfig.build.json",
+		"build:types": "WATCH=false bun scripts/ts/gen-types.ts",
+		"check": "bun run check:fmt && bun run --parallel check:lint check:types check:audit && bun run check:package && bun run check:test",
+		"check:fmt": "biome format .",
+		"check:lint": "biome lint .",
+		"check:types": "tsc -b",
+		"check:test": "playwright test",
+		"check:package": "bun run build:library && bun scripts/package-smoke.ts",
+		"check:audit": "bun audit",
+		"fmt": "biome check --write .",
+		"lint": "bun run check:lint",
+		"test": "bun run check:test",
+		"_dev": "vite",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"hybrids": "^9.1.22"
+	},
+	"devDependencies": {
+		"@axe-core/playwright": "^4.12.1",
+		"@biomejs/biome": "^2.5.3",
+		"@ladle/react": "^5.1.1",
+		"@playwright/test": "^1.61.1",
+		"@types/bun": "^1.3.14",
+		"@types/react": "^19.2.17",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^6.0.3",
+		"react": "^19.2.7",
+		"react-dom": "^19.2.7",
+		"typescript": "^7.0.2",
+		"vite": "^8.1.4"
+	}
 }

@@ -1,0 +1,32 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Tabs" />
+
+# Tabs
+
+`hycn-tabs` turns paired light-DOM tab and panel slots into a complete ARIA tabs interface.
+
+## Usage
+
+```html
+<hycn-tabs>
+  <button slot="tab" type="button">Overview</button>
+  <button slot="tab" type="button">API</button>
+  <section slot="panel">Overview content</section>
+  <section slot="panel">API content</section>
+</hycn-tabs>
+```
+
+## API
+
+| Property | Attribute | Default | Purpose |
+| --- | --- | --- | --- |
+| `selectedIndex` | `selected-index` | `0` | Selected tab and panel index. |
+| `orientation` | `orientation` | `horizontal` | `horizontal` or `vertical` arrow-key model. |
+| `activation` | — | `automatic` | `automatic` or `manual` selection. |
+
+Event: `hycn-change` contains `{ index }`. Slots: `tab`, `panel`. Parts: `tablist`, `panels`.
+
+## Keyboard behavior
+
+Arrow keys move between tabs according to orientation. Home and End jump to the first and last enabled tab. Manual activation uses Enter or Space; automatic activation selects as focus moves.

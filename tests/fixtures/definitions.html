@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>HYCN side-effect-free exports</title>
+	</head>
+	<body>
+		<script type="module">
+			import * as components from "/dist/index.js"
+
+			globalThis.hycnDefinitions = components
+		</script>
+	</body>
+</html>
