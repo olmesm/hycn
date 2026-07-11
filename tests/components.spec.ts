@@ -41,6 +41,7 @@ test("registers every public component", async ({ page }) => {
 		.poll(() =>
 			page.evaluate(() =>
 				[
+					"hycn-accordion",
 					"hycn-dialog",
 					"hycn-tabs",
 					"hycn-menu",
@@ -51,6 +52,51 @@ test("registers every public component", async ({ page }) => {
 			),
 		)
 		.toBe(true)
+})
+
+test("accordion coordinates exclusive disclosure state and emits toggle details", async ({
+	page,
+}) => {
+	const accordion = page.locator("hycn-accordion")
+	const first = accordion.locator("details").filter({ hasText: "First question" })
+	const second = accordion.locator("details").filter({ hasText: "Second question" })
+	await accordion.evaluate((element) => {
+		Reflect.set(globalThis, "accordionToggleDetails", [])
+		element.addEventListener("hycn-toggle", (event) => {
+			Reflect.get(globalThis, "accordionToggleDetails").push((event as CustomEvent).detail)
+		})
+	})
+
+	await page.getByText("Second question", { exact: true }).click()
+	await expect(second).toHaveAttribute("open", "")
+	await expect(first).not.toHaveAttribute("open")
+	await expect
+		.poll(() => page.evaluate(() => Reflect.get(globalThis, "accordionToggleDetails")))
+		.toContainEqual({ expanded: true, index: 1 })
+
+	await page.getByText("Second question", { exact: true }).click()
+	await expect(second).not.toHaveAttribute("open")
+	await accordion.evaluate((element: HTMLElementTagNameMap["hycn-accordion"]) => {
+		element.collapsible = false
+	})
+	await expect(first).toHaveAttribute("open", "")
+	await page.getByText("First question", { exact: true }).click()
+	await expect(first).toHaveAttribute("open", "")
+})
+
+test("accordion roves focus across enabled summaries", async ({ page }) => {
+	const first = page.getByText("First question", { exact: true })
+	const second = page.getByText("Second question", { exact: true })
+	const disabled = page.getByText("Disabled question", { exact: true })
+
+	await first.focus()
+	await page.keyboard.press("ArrowDown")
+	await expect(second).toBeFocused()
+	await page.keyboard.press("ArrowDown")
+	await expect(first).toBeFocused()
+	await page.keyboard.press("End")
+	await expect(second).toBeFocused()
+	await expect(disabled).toHaveAttribute("aria-disabled", "true")
 })
 
 test("dialog manages focus, wraps composed focus, and restores the opener", async ({ page }) => {

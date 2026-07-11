@@ -1,3 +1,8 @@
+export type { AccordionProps } from "./components/hycn-accordion.js"
+export {
+	component as accordion,
+	register as registerAccordion,
+} from "./components/hycn-accordion.js"
 export type { ComboboxOption, ComboboxProps } from "./components/hycn-combobox.js"
 export { component as combobox, register as registerCombobox } from "./components/hycn-combobox.js"
 export type { DialogProps } from "./components/hycn-dialog.js"

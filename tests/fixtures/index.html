@@ -15,6 +15,24 @@
 		<main>
 			<h1>HYCN component fixtures</h1>
 
+			<section class="fixture" id="accordion-fixture">
+				<h2>Accordion</h2>
+				<hycn-accordion exclusive>
+					<details open>
+						<summary>First question</summary>
+						<p>First answer</p>
+					</details>
+					<details>
+						<summary>Second question</summary>
+						<p>Second answer</p>
+					</details>
+					<details disabled>
+						<summary>Disabled question</summary>
+						<p>Disabled answer</p>
+					</details>
+				</hycn-accordion>
+			</section>
+
 			<section class="fixture" id="dialog-fixture">
 				<h2>Dialog</h2>
 				<button id="open-dialog" type="button">Open dialog</button>
@@ -73,6 +91,7 @@
 			})
 
 			await Promise.all([
+				"hycn-accordion",
 				"hycn-dialog",
 				"hycn-tabs",
 				"hycn-menu",

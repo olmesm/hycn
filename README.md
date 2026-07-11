@@ -6,6 +6,7 @@ HYCN publishes unbundled standard ES modules, TypeScript declarations, a Custom 
 
 ## Components
 
+- `hycn-accordion` — progressive native disclosures with optional exclusive expansion
 - `hycn-dialog` — modal focus management, cancellation, dismissal, and restoration
 - `hycn-tabs` — automatic or manual activation with horizontal and vertical navigation
 - `hycn-menu` — trigger coordination, popup focus, selection, and outside dismissal
@@ -14,6 +15,8 @@ HYCN publishes unbundled standard ES modules, TypeScript declarations, a Custom 
 - `hycn-visually-hidden` — visually hidden accessible content
 
 `simple-counter` remains as the small Hybrids authoring example.
+
+Coverage of the broader Open UI research inventory is tracked in [`docs/open-ui-coverage.md`](docs/open-ui-coverage.md).
 
 ## Installation
 

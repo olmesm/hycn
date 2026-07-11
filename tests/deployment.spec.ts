@@ -1,6 +1,12 @@
 import { expect, test } from "@playwright/test"
 
 test("production component book registers and runs interactive components", async ({ page }) => {
+	await page.goto("/build/?story=components--accordion--default")
+	await page.getByText("Can more than one section open?", { exact: true }).click()
+	await expect(
+		page.locator("details").filter({ hasText: "Can more than one section open?" }),
+	).toHaveAttribute("open", "")
+
 	await page.goto("/build/?story=components--dialog--default")
 
 	await expect

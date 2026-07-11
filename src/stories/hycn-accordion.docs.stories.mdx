@@ -1,0 +1,35 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Accordion" />
+
+# Accordion
+
+`hycn-accordion` coordinates direct child `details` disclosures while preserving their native, progressively enhanced behavior.
+
+## Usage
+
+```html
+<hycn-accordion exclusive>
+  <details open>
+    <summary>First question</summary>
+    <p>First answer.</p>
+  </details>
+  <details>
+    <summary>Second question</summary>
+    <p>Second answer.</p>
+  </details>
+</hycn-accordion>
+```
+
+## API
+
+| Property | Attribute | Default | Purpose |
+| --- | --- | --- | --- |
+| `exclusive` | `exclusive` | `false` | Opening one item closes the other items. |
+| `collapsible` | `collapsible` | `true` | Allows the final open item to close. |
+
+Event: `hycn-toggle` contains `{ expanded, index }`. The default slot accepts direct child `details` elements. CSS custom property: `--hycn-accordion-border`.
+
+## Keyboard behavior
+
+Native summary Enter and Space behavior is preserved. Arrow Up and Arrow Down move between enabled summaries; Home and End move to the first and last summary. Add `disabled` to a `details` item to remove its summary from managed interaction.

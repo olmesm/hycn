@@ -32,6 +32,22 @@ const slot = (name: string, description: string) => ({ description, name })
 const cssProperty = (name: string, description: string) => ({ description, name })
 
 export const componentMetadata: Record<string, ComponentMetadata> = {
+	"hycn-accordion": {
+		description: "A group of native disclosure widgets with optional exclusive expansion.",
+		members: [
+			field("exclusive", "boolean", "exclusive", "false"),
+			field("collapsible", "boolean", "collapsible", "true"),
+		],
+		events: [
+			event(
+				"hycn-toggle",
+				"{ expanded: boolean; index: number }",
+				"Emitted after a direct child disclosure changes state.",
+			),
+		],
+		slots: [slot("", "Direct child details disclosure elements.")],
+		cssProperties: [cssProperty("--hycn-accordion-border", "Divider color between items.")],
+	},
 	"hycn-combobox": {
 		description: "An editable combobox with filtered listbox options and keyboard selection.",
 		members: [

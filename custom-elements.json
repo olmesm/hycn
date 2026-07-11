@@ -4,6 +4,86 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-accordion.js",
+      "declarations": [
+        {
+          "description": "A group of native disclosure widgets with optional exclusive expansion.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "exclusive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "true",
+              "kind": "field",
+              "name": "collapsible",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted after a direct child disclosure changes state.",
+              "name": "hycn-toggle",
+              "type": {
+                "text": "CustomEvent<{ expanded: boolean; index: number }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Direct child details disclosure elements.",
+              "name": ""
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Divider color between items.",
+              "name": "--hycn-accordion-border"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "exclusive",
+              "name": "exclusive",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "collapsible",
+              "name": "collapsible",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnAccordion",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-accordion"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnAccordion"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-accordion"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-combobox.js",
       "declarations": [
         {

@@ -24,6 +24,7 @@ const requiredFiles = [
 	packageJson.exports["./register"].import,
 	"./dist/custom-elements.d.ts",
 	...[
+		"hycn-accordion",
 		"hycn-combobox",
 		"hycn-dialog",
 		"hycn-menu",
