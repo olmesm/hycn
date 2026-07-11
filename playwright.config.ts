@@ -16,7 +16,8 @@ export default defineConfig({
 		trace: "on-first-retry",
 	},
 	webServer: {
-		command: "bun run check:package && bunx vite --host 127.0.0.1 --port 4173",
+		command:
+			"bun run check:package && bun run build:book --base /build/ && bunx vite --host 127.0.0.1 --port 4173",
 		reuseExistingServer: !process.env.CI,
 		url: "http://127.0.0.1:4173/tests/fixtures/",
 	},

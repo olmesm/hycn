@@ -26,7 +26,10 @@
 		"README.md"
 	],
 	"sideEffects": [
-		"./dist/register.js"
+		"./dist/register.js",
+		"./src/index.css",
+		"./src/main.tsx",
+		"./src/register.ts"
 	],
 	"overrides": {
 		"@babel/core": "7.29.7",
