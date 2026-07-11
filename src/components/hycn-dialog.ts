@@ -1,6 +1,5 @@
-import { html } from "hybrids"
-import { focusableElements } from "../utils/dom.js"
-import { emit } from "../utils/events.js"
+import { dispatch, html } from "hybrids"
+import { deepActiveElement, tabbableElements } from "../utils/dom.js"
 import { registerComponent } from "../utils/register.js"
 import type { DefineComponent } from "../utils/types.js"
 
@@ -12,11 +11,24 @@ export interface DialogProps {
 	open: boolean
 }
 
-export type Type = DefineComponent<DialogProps>
+interface DialogState extends DialogProps {
+	panel: HTMLElement | null
+	render: () => ShadowRoot
+}
+
+export type Type = DefineComponent<DialogProps, DialogState>
 type Host = Type["Props"]
 
 const previousFocus = new WeakMap<Host, HTMLElement>()
-const inertedElements = new WeakMap<Host, Map<HTMLElement, boolean>>()
+
+interface ModalManager {
+	active: Host[]
+	document: Document
+	observer: MutationObserver
+	originals: Map<HTMLElement, boolean>
+}
+
+const modalManagers = new WeakMap<Document, ModalManager>()
 
 const styles = `
 	:host { display: contents; }
@@ -31,6 +43,13 @@ const styles = `
 		z-index: var(--hycn-dialog-z-index, 1000);
 	}
 	[part="backdrop"][hidden] { display: none; }
+	[part="backdrop"][data-modal="false"] {
+		background: transparent;
+		inset: auto var(--hycn-dialog-gutter, 1rem) var(--hycn-dialog-gutter, 1rem) auto;
+		padding: 0;
+		pointer-events: none;
+	}
+	[part="backdrop"][data-modal="false"] [part="panel"] { pointer-events: auto; }
 	[part="panel"] {
 		background: var(--hycn-dialog-background, Canvas);
 		border-radius: var(--hycn-dialog-radius, .75rem);
@@ -44,72 +63,144 @@ const styles = `
 	}
 `
 
-function focusDialog(host: Host) {
-	queueMicrotask(() => {
-		if (!host.open) return
-		const autofocus = host.querySelector<HTMLElement>("[autofocus]")
-		const first = focusableElements(host)[0]
-		const panel = host.shadowRoot?.querySelector<HTMLElement>("[part='panel']")
-		;(autofocus ?? first ?? panel)?.focus()
-	})
+function getModalManager(document: Document) {
+	let manager = modalManagers.get(document)
+	if (!manager) {
+		manager = {
+			active: [],
+			document,
+			observer: new MutationObserver(() => {
+				const current = modalManagers.get(document)
+				if (current) recomputeModalIsolation(current)
+			}),
+			originals: new Map(),
+		}
+		modalManagers.set(document, manager)
+	}
+	return manager
 }
 
-function setOutsideInert(host: Host, inert: boolean) {
-	if (!inert) {
-		for (const [element, previous] of inertedElements.get(host) ?? []) element.inert = previous
-		inertedElements.delete(host)
-		return
-	}
+function restoreManager(manager: ModalManager) {
+	for (const [element, previous] of manager.originals) element.inert = previous
+	manager.originals.clear()
+}
 
-	const changed = new Map<HTMLElement, boolean>()
-	let current: HTMLElement = host
-	while (current.parentElement) {
-		for (const sibling of current.parentElement.children) {
-			if (sibling instanceof HTMLElement && sibling !== current && !changed.has(sibling)) {
-				changed.set(sibling, sibling.inert)
+function composedParent(element: HTMLElement) {
+	if (element.parentElement) return element.parentElement
+	const root = element.getRootNode()
+	return root instanceof ShadowRoot && root.host instanceof HTMLElement ? root.host : null
+}
+
+function siblings(element: HTMLElement) {
+	if (element.parentElement) return Array.from(element.parentElement.children)
+	const root = element.getRootNode()
+	return root instanceof ShadowRoot ? Array.from(root.children) : []
+}
+
+function recomputeModalIsolation(manager: ModalManager) {
+	restoreManager(manager)
+	manager.active = manager.active.filter((host) => host.isConnected && host.open && host.modal)
+	manager.observer.disconnect()
+	const top = manager.active.at(-1)
+	if (!top) return
+
+	manager.observer.observe(manager.document.documentElement, { childList: true, subtree: true })
+	let current: HTMLElement | null = top
+	while (current) {
+		const root = current.getRootNode()
+		if (root instanceof ShadowRoot)
+			manager.observer.observe(root, { childList: true, subtree: true })
+		for (const sibling of siblings(current)) {
+			if (
+				sibling instanceof HTMLElement &&
+				sibling !== current &&
+				!manager.originals.has(sibling)
+			) {
+				manager.originals.set(sibling, sibling.inert)
 				sibling.inert = true
 			}
 		}
-		current = current.parentElement
+		current = composedParent(current)
 	}
-	inertedElements.set(host, changed)
+}
+
+function syncModal(host: Host) {
+	const manager = getModalManager(host.ownerDocument)
+	const shouldBeActive = host.open && host.modal && host.isConnected
+	const index = manager.active.indexOf(host)
+	if (shouldBeActive && index < 0) manager.active.push(host)
+	else if (!shouldBeActive && index >= 0) manager.active.splice(index, 1)
+	recomputeModalIsolation(manager)
+}
+
+function deactivateModal(host: Host) {
+	const manager = modalManagers.get(host.ownerDocument)
+	if (!manager) return
+	const index = manager.active.indexOf(host)
+	if (index >= 0) manager.active.splice(index, 1)
+	recomputeModalIsolation(manager)
+}
+
+function focusDialog(host: Host) {
+	const panel = host.panel
+	const autofocus = host.querySelector<HTMLElement>("[autofocus]")
+	const first = tabbableElements(host)[0]
+	;(autofocus ?? first ?? panel)?.focus()
+}
+
+function restoreFocus(host: Host) {
+	const previous = previousFocus.get(host)
+	previousFocus.delete(host)
+	if (previous?.isConnected) previous.focus()
+}
+
+function cleanup(host: Host) {
+	deactivateModal(host)
+	restoreFocus(host)
 }
 
 function requestClose(host: Host, reason = "programmatic") {
 	if (!host.open) return
 	host.open = false
-	emit(host, "hycn-close", { reason })
+	dispatch(host, "hycn-close", {
+		bubbles: true,
+		composed: true,
+		detail: { reason },
+	})
 }
 
-function onBackdropClick(host: Host, event?: Event) {
-	if (!event || event.target !== event.currentTarget || !host.closeOnBackdrop) return
-	requestClose(host, "backdrop")
+function onBackdropClick(host: Host, event: Event) {
+	if (event.target === event.currentTarget && host.closeOnBackdrop) requestClose(host, "backdrop")
 }
 
-function onKeyDown(host: Host, event?: Event) {
-	if (!(event instanceof KeyboardEvent)) return
-
+function onKeyDown(host: Host, event: KeyboardEvent) {
+	if (event.defaultPrevented) return
 	if (event.key === "Escape") {
-		if (emit(host, "hycn-cancel", { reason: "escape" }, { cancelable: true })) {
-			requestClose(host, "escape")
-		}
+		const shouldClose = dispatch(host, "hycn-cancel", {
+			bubbles: true,
+			cancelable: true,
+			composed: true,
+			detail: { reason: "escape" },
+		})
+		if (shouldClose) requestClose(host, "escape")
 		return
 	}
 
 	if (event.key !== "Tab" || !host.modal) return
-	const focusable = focusableElements(host)
-	if (focusable.length === 0) {
+	const items = tabbableElements(host)
+	if (items.length === 0) {
 		event.preventDefault()
-		host.shadowRoot?.querySelector<HTMLElement>("[part='panel']")?.focus()
+		host.panel?.focus()
 		return
 	}
 
-	const first = focusable[0]
-	const last = focusable.at(-1)
-	if (event.shiftKey && document.activeElement === first) {
+	const active = deepActiveElement()
+	const first = items[0]
+	const last = items.at(-1)
+	if (event.shiftKey && (active === first || active === host.panel)) {
 		event.preventDefault()
 		last?.focus()
-	} else if (!event.shiftKey && document.activeElement === last) {
+	} else if (!event.shiftKey && active === last) {
 		event.preventDefault()
 		first?.focus()
 	}
@@ -120,43 +211,52 @@ export const component: Type["Component"] = {
 	close: (host) => (reason?: string) => requestClose(host, reason),
 	closeOnBackdrop: true,
 	label: "Dialog",
-	modal: true,
+	modal: {
+		value: true,
+		observe: syncModal,
+	},
 	open: {
 		value: false,
 		reflect: true,
 		observe(host, value, lastValue) {
 			if (value === lastValue) return
 			if (value) {
-				if (document.activeElement instanceof HTMLElement) {
-					previousFocus.set(host, document.activeElement)
-				}
-				if (host.modal) setOutsideInert(host, true)
+				const active = deepActiveElement()
+				if (active instanceof HTMLElement) previousFocus.set(host, active)
+				syncModal(host)
 				focusDialog(host)
 			} else if (lastValue) {
-				setOutsideInert(host, false)
-				queueMicrotask(() => previousFocus.get(host)?.focus())
+				deactivateModal(host)
+				restoreFocus(host)
 			}
 		},
 	},
-	render: ({ label, modal, open }) =>
-		html`
-			<div
-				part="backdrop"
-				hidden="${!open}"
-				onclick="${onBackdropClick}"
-				onkeydown="${onKeyDown}"
-			>
-				<section
-					aria-label="${label}"
-					aria-modal="${modal ? "true" : undefined}"
-					part="panel"
-					role="dialog"
-					tabindex="-1"
+	panel: ({ render }) => render().querySelector<HTMLElement>("[part='panel']"),
+	render: {
+		connect(host) {
+			return () => cleanup(host)
+		},
+		value: ({ label, modal, open }) =>
+			html`
+				<div
+					data-modal="${String(modal)}"
+					part="backdrop"
+					hidden="${!open}"
+					onclick="${onBackdropClick}"
+					onkeydown="${onKeyDown}"
 				>
-					<slot></slot>
-				</section>
-			</div>
-		`.style(styles),
+					<section
+						aria-label="${label}"
+						aria-modal="${modal ? "true" : undefined}"
+						part="panel"
+						role="dialog"
+						tabindex="-1"
+					>
+						<slot></slot>
+					</section>
+				</div>
+			`.style(styles),
+	},
 }
 
 export const register = () => registerComponent(component)

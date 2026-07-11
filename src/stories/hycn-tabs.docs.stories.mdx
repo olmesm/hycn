@@ -23,10 +23,12 @@ import { Meta } from "@ladle/react"
 | --- | --- | --- | --- |
 | `selectedIndex` | `selected-index` | `0` | Selected tab and panel index. |
 | `orientation` | `orientation` | `horizontal` | `horizontal` or `vertical` arrow-key model. |
-| `activation` | — | `automatic` | `automatic` or `manual` selection. |
+| `activation` | `activation` | `automatic` | `automatic` or `manual` selection. |
 
 Event: `hycn-change` contains `{ index }`. Slots: `tab`, `panel`. Parts: `tablist`, `panels`.
 
 ## Keyboard behavior
 
 Arrow keys move between tabs according to orientation. Home and End jump to the first and last enabled tab. Manual activation uses Enter or Space; automatic activation selects as focus moves.
+
+Disabled tabs retain their positional panel pairing and are skipped. Changes to `disabled` and `aria-disabled` are observed after slot assignment.

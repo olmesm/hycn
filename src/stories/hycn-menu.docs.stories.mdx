@@ -23,8 +23,10 @@ import { Meta } from "@ladle/react"
 | `open` | `open` | `false` | Controls popup visibility. |
 | `label` | `label` | `"Menu"` | Accessible menu name. |
 
-Event: `hycn-select` contains `{ value }`, using `data-value` or item text. Slots: `trigger`, default menu items. Part: `menu`. Theme with `--hycn-menu-background`, `--hycn-menu-border`, `--hycn-menu-radius`, and `--hycn-menu-z-index`.
+Event: `hycn-select` contains `{ value }`, using `data-value` or item text. Slots: `trigger`, default menu items. Parts: `trigger`, `backdrop`, `menu`. Theme with `--hycn-menu-background`, `--hycn-menu-border`, `--hycn-menu-radius`, and `--hycn-menu-z-index`.
 
 ## Keyboard behavior
 
 Enter, Space, ArrowDown, or ArrowUp opens from the trigger. Arrow keys, Home, and End navigate enabled items. Escape closes and restores trigger focus; Tab closes without interrupting normal focus movement.
+
+Default-slot children may use `menuitem`, `menuitemcheckbox`, or `menuitemradio`. Separators and groups remain in the accessibility structure but are skipped by navigation and selection.

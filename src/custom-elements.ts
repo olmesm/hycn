@@ -18,5 +18,3 @@ declare global {
     "simple-counter": SimpleCounterType["Element"]
   }
 }
-
-export {}

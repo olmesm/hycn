@@ -1,10 +1,10 @@
 {
-  "schemaVersion": "1.0.0",
-  "readme": "./README.md",
+  "schemaVersion": "2.1.0",
+  "readme": "README.md",
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "components/hycn-combobox.js",
+      "path": "dist/components/hycn-combobox.js",
       "declarations": [
         {
           "description": "An editable combobox with filtered listbox options and keyboard selection.",
@@ -18,7 +18,6 @@
               }
             },
             {
-              "attribute": "value",
               "default": "\"\"",
               "kind": "field",
               "name": "value",
@@ -35,7 +34,6 @@
               }
             },
             {
-              "attribute": "label",
               "default": "\"Choose an option\"",
               "kind": "field",
               "name": "label",
@@ -44,7 +42,6 @@
               }
             },
             {
-              "attribute": "placeholder",
               "default": "\"\"",
               "kind": "field",
               "name": "placeholder",
@@ -53,7 +50,6 @@
               }
             },
             {
-              "attribute": "disabled",
               "default": "false",
               "kind": "field",
               "name": "disabled",
@@ -62,7 +58,6 @@
               }
             },
             {
-              "attribute": "open",
               "default": "false",
               "kind": "field",
               "name": "open",
@@ -115,21 +110,70 @@
               "name": "--hycn-combobox-background"
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "placeholder",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "HycnCombobox",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-combobox"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnCombobox"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-combobox"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/hycn-dialog.js",
+      "path": "dist/components/hycn-dialog.js",
       "declarations": [
         {
           "description": "A modal or non-modal dialog with focus containment and restoration.",
           "members": [
             {
-              "attribute": "open",
               "default": "false",
               "kind": "field",
               "name": "open",
@@ -146,7 +190,6 @@
               }
             },
             {
-              "attribute": "label",
               "default": "\"Dialog\"",
               "kind": "field",
               "name": "label",
@@ -239,21 +282,49 @@
               "name": "--hycn-dialog-z-index"
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "HycnDialog",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-dialog"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnDialog"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-dialog"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/hycn-menu.js",
+      "path": "dist/components/hycn-menu.js",
       "declarations": [
         {
           "description": "A trigger-controlled popup menu with managed keyboard focus.",
           "members": [
             {
-              "attribute": "open",
               "default": "false",
               "kind": "field",
               "name": "open",
@@ -262,7 +333,6 @@
               }
             },
             {
-              "attribute": "label",
               "default": "\"Menu\"",
               "kind": "field",
               "name": "label",
@@ -292,6 +362,14 @@
           ],
           "cssParts": [
             {
+              "description": "Trigger positioning wrapper.",
+              "name": "trigger"
+            },
+            {
+              "description": "Outside-interaction dismissal surface.",
+              "name": "backdrop"
+            },
+            {
               "description": "Popup menu surface.",
               "name": "menu"
             }
@@ -314,21 +392,49 @@
               "name": "--hycn-menu-z-index"
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "HycnMenu",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-menu"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnMenu"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-menu"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/hycn-tabs.js",
+      "path": "dist/components/hycn-tabs.js",
       "declarations": [
         {
           "description": "A slotted tabs interface with roving focus and automatic or manual activation.",
           "members": [
             {
-              "attribute": "selected-index",
               "default": "0",
               "kind": "field",
               "name": "selectedIndex",
@@ -337,7 +443,6 @@
               }
             },
             {
-              "attribute": "orientation",
               "default": "\"horizontal\"",
               "kind": "field",
               "name": "orientation",
@@ -346,7 +451,6 @@
               }
             },
             {
-              "attribute": "activation",
               "default": "\"automatic\"",
               "kind": "field",
               "name": "activation",
@@ -384,15 +488,51 @@
               "name": "panels"
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "selectedIndex",
+              "name": "selected-index",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "orientation",
+              "name": "orientation",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              }
+            },
+            {
+              "fieldName": "activation",
+              "name": "activation",
+              "type": {
+                "text": "\"automatic\" | \"manual\""
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "HycnTabs",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-tabs"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTabs"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-tabs"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/hycn-tree.js",
+      "path": "dist/components/hycn-tree.js",
       "declarations": [
         {
           "description": "A hierarchical tree with expansion, selection, and roving keyboard focus.",
@@ -414,7 +554,6 @@
               }
             },
             {
-              "attribute": "selected-id",
               "default": "\"\"",
               "kind": "field",
               "name": "selectedId",
@@ -423,7 +562,6 @@
               }
             },
             {
-              "attribute": "label",
               "default": "\"Tree\"",
               "kind": "field",
               "name": "label",
@@ -470,15 +608,44 @@
               "name": "label"
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "selectedId",
+              "name": "selected-id",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "HycnTree",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-tree"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTree"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-tree"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/hycn-visually-hidden.js",
+      "path": "dist/components/hycn-visually-hidden.js",
       "declarations": [
         {
           "description": "Visually hides slotted content while keeping it available to assistive technology.",
@@ -488,21 +655,33 @@
               "name": ""
             }
           ],
-          "kind": "custom-element-definition",
+          "customElement": true,
+          "kind": "class",
           "name": "HycnVisuallyHidden",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "hycn-visually-hidden"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnVisuallyHidden"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-visually-hidden"
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "components/simple-counter.js",
+      "path": "dist/components/simple-counter.js",
       "declarations": [
         {
           "description": "A minimal stateful counter used as a Hybrids authoring example.",
           "members": [
             {
-              "attribute": "count",
               "default": "0",
               "kind": "field",
               "name": "count",
@@ -511,9 +690,31 @@
               }
             }
           ],
-          "kind": "custom-element-definition",
+          "attributes": [
+            {
+              "fieldName": "count",
+              "name": "count",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
           "name": "SimpleCounter",
+          "superclass": {
+            "name": "HTMLElement"
+          },
           "tagName": "simple-counter"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "SimpleCounter"
+          },
+          "kind": "custom-element-definition",
+          "name": "simple-counter"
         }
       ]
     }

@@ -1,6 +1,8 @@
 import { watch, writeFileSync } from "node:fs"
 import path from "node:path"
+import Ajv from "ajv"
 import { Glob } from "bun"
+import manifestSchema from "custom-elements-manifest/schema.json" with { type: "json" }
 import { componentMetadata } from "./component-metadata"
 
 const DIR = path.join(process.cwd(), "src", "components")
@@ -9,6 +11,7 @@ const PUBLIC_TYPES_OUT = path.join(process.cwd(), "src", "custom-elements.ts")
 const MANIFEST_OUT = path.join(process.cwd(), "custom-elements.json")
 const GLOB = path.join(DIR, "**", "*.{ts,tsx}")
 const glob = new Glob(GLOB)
+const validateManifest = new Ajv({ allErrors: true, strict: false }).compile(manifestSchema)
 
 const kebabCase = (value: string) =>
 	value
@@ -53,8 +56,6 @@ ${data
     }
   }
 }
-
-export {}
 `
 
 const publicTypesTemplate = (
@@ -71,8 +72,6 @@ declare global {
 ${data.map((d) => `    "${d.fileName}": ${d.typeName}["Element"]`).join("\n")}
   }
 }
-
-export {}
 `
 
 const makeFile = (files: string[]) => {
@@ -96,30 +95,56 @@ const makeFile = (files: string[]) => {
 
 	writeFileSync(OUT, template(data), { encoding: "utf-8" })
 	writeFileSync(PUBLIC_TYPES_OUT, publicTypesTemplate(data), { encoding: "utf-8" })
-	writeFileSync(
-		MANIFEST_OUT,
-		`${JSON.stringify(
-			{
-				schemaVersion: "1.0.0",
-				readme: "./README.md",
-				modules: data.map((item) => ({
-					kind: "javascript-module",
-					path: `${item.relPath.slice(2)}.js`,
-					declarations: [
-						{
-							...componentMetadata[item.fileName],
-							kind: "custom-element-definition",
-							name: item.typeName.replace(/Type$/, ""),
-							tagName: item.fileName,
-						},
-					],
-				})),
-			},
-			null,
-			2,
-		)}\n`,
-		{ encoding: "utf-8" },
-	)
+	const manifest = {
+		schemaVersion: "2.1.0",
+		readme: "README.md",
+		modules: data.map((item) => {
+			const metadata = componentMetadata[item.fileName]
+			const declarationName = item.typeName.replace(/Type$/, "")
+			const members = metadata.members?.map(
+				({ attributeName: _attributeName, ...member }) => member,
+			)
+			const attributes = metadata.members
+				?.filter(({ attributeName }) => attributeName)
+				.map(({ attributeName, name, type }) => ({
+					fieldName: name,
+					name: attributeName,
+					type,
+				}))
+
+			return {
+				kind: "javascript-module",
+				path: `dist/components/${item.fileName}.js`,
+				declarations: [
+					{
+						...metadata,
+						attributes,
+						customElement: true,
+						kind: "class",
+						members,
+						name: declarationName,
+						superclass: { name: "HTMLElement" },
+						tagName: item.fileName,
+					},
+				],
+				exports: [
+					{
+						declaration: { name: declarationName },
+						kind: "custom-element-definition",
+						name: item.fileName,
+					},
+				],
+			}
+		}),
+	}
+
+	if (!validateManifest(manifest)) {
+		throw new Error(
+			`Invalid Custom Elements Manifest:\n${JSON.stringify(validateManifest.errors, null, 2)}`,
+		)
+	}
+
+	writeFileSync(MANIFEST_OUT, `${JSON.stringify(manifest, null, 2)}\n`, { encoding: "utf-8" })
 }
 
 const run = async () => {

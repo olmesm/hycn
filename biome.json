@@ -20,11 +20,15 @@
 	"files": {
 		"includes": [
 			"**",
+			"!!.ref",
 			"!!build",
+			"!!custom-elements.json",
 			"!!dist",
 			"!!node_modules",
 			"!!playwright-report",
 			"!!test-results",
+			"!!tmp",
+			"!!src/custom-elements.ts",
 			"!!src/globals.d.ts"
 		]
 	}

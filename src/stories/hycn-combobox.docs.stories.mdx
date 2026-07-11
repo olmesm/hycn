@@ -30,3 +30,5 @@ combobox.addEventListener("hycn-change", ({ detail }) => console.log(detail.valu
 Events: `hycn-input` contains `{ query }`; `hycn-change` contains `{ label, value }`. Parts: `base`, `input`, `listbox`, `option`, `empty`.
 
 Arrow keys move the active option, Enter selects it, Escape closes, and Tab accepts normal page navigation.
+
+`value` and `options` may be assigned in either order. When asynchronous options arrive or a selected label changes, the displayed label is reconciled without overwriting an in-progress user query.

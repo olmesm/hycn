@@ -22,6 +22,7 @@
 					<h3>Account settings</h3>
 					<button id="dialog-first" type="button">Save</button>
 					<button id="dialog-close" type="button">Cancel</button>
+					<nested-focus></nested-focus>
 				</hycn-dialog>
 			</section>
 
@@ -29,8 +30,10 @@
 				<h2>Tabs</h2>
 				<hycn-tabs>
 					<button slot="tab" type="button">Overview</button>
+					<button disabled slot="tab" type="button">Disabled</button>
 					<button slot="tab" type="button">API</button>
 					<div slot="panel">Overview panel</div>
+					<div slot="panel">Disabled panel</div>
 					<div slot="panel">API panel</div>
 				</hycn-tabs>
 			</section>
@@ -40,7 +43,9 @@
 				<hycn-menu label="Actions">
 					<button slot="trigger" type="button">Actions</button>
 					<button data-value="edit" type="button">Edit</button>
-					<button data-value="duplicate" type="button">Duplicate</button>
+					<hr slot="" />
+					<div aria-disabled="true" data-value="disabled">Disabled action</div>
+					<div data-value="duplicate" slot="">Duplicate</div>
 				</hycn-menu>
 			</section>
 
@@ -53,10 +58,19 @@
 				<h2>Tree</h2>
 				<hycn-tree label="Project files"></hycn-tree>
 			</section>
+
+			<button id="outside" type="button">Outside target</button>
 		</main>
 
 		<script type="module">
 			import "/dist/register.js"
+
+			customElements.define("nested-focus", class extends HTMLElement {
+				constructor() {
+					super()
+					this.attachShadow({ mode: "open" }).innerHTML = '<button id="nested-button" type="button">Nested action</button>'
+				}
+			})
 
 			await Promise.all([
 				"hycn-dialog",

@@ -1,6 +1,5 @@
-import { html } from "hybrids"
+import { dispatch, html } from "hybrids"
 import { clampIndex, eventElement } from "../utils/dom.js"
-import { emit } from "../utils/events.js"
 import { registerComponent } from "../utils/register.js"
 import type { DefineComponent } from "../utils/types.js"
 
@@ -19,66 +18,105 @@ interface VisibleTreeItem extends TreeItem {
 }
 
 export interface TreeProps {
-	activeId: string
 	expanded: string[]
 	items: TreeItem[]
 	label: string
 	selectedId: string
 }
 
-export type Type = DefineComponent<TreeProps>
+interface TreeState extends TreeProps {
+	activeElement: HTMLElement | null
+	activeId: string
+	render: () => ShadowRoot
+	visibleItems: VisibleTreeItem[]
+}
+
+export type Type = DefineComponent<TreeProps, TreeState>
 type Host = Type["Props"]
 
-function visibleItems(items: TreeItem[], expanded: string[], level = 1, parentId?: string) {
+function flatten(items: TreeItem[], expanded: string[], level = 1, parentId?: string) {
 	const result: VisibleTreeItem[] = []
 	items.forEach((item, index) => {
 		result.push({ ...item, level, parentId, position: index + 1, setSize: items.length })
 		if (item.children?.length && expanded.includes(item.id)) {
-			result.push(...visibleItems(item.children, expanded, level + 1, item.id))
+			result.push(...flatten(item.children, expanded, level + 1, item.id))
 		}
 	})
 	return result
 }
 
+function findPath(items: TreeItem[], id: string, ancestors: string[] = []): string[] | undefined {
+	for (const item of items) {
+		const path = [...ancestors, item.id]
+		if (item.id === id) return path
+		const nested = item.children && findPath(item.children, id, path)
+		if (nested) return nested
+	}
+	return undefined
+}
+
+function resolvedActiveId(host: Host, visible = host.visibleItems) {
+	if (visible.some((item) => item.id === host.activeId)) return host.activeId
+	const visibleIds = new Set(visible.map((item) => item.id))
+	const ancestor = findPath(host.items, host.activeId)
+		?.reverse()
+		.find((id) => visibleIds.has(id))
+	return ancestor ?? visible.find((item) => !item.disabled)?.id ?? visible[0]?.id ?? ""
+}
+
+function normalizeActive(host: Host, visible: VisibleTreeItem[]) {
+	const activeId = resolvedActiveId(host, visible)
+	if (activeId !== host.activeId) host.activeId = activeId
+}
+
 function focusItem(host: Host, id: string) {
 	host.activeId = id
-	queueMicrotask(() => {
-		host.shadowRoot?.querySelector<HTMLElement>(`[data-tree-id="${CSS.escape(id)}"]`)?.focus()
-	})
+	host.render()
+	host.activeElement?.focus()
 }
 
 function toggle(host: Host, id: string, force?: boolean) {
 	const open = host.expanded.includes(id)
 	const nextOpen = force ?? !open
+	if (!nextOpen) {
+		const activePath = findPath(host.items, host.activeId)
+		if (activePath?.includes(id) && host.activeId !== id) host.activeId = id
+	}
 	host.expanded = nextOpen
 		? [...host.expanded.filter((value) => value !== id), id]
 		: host.expanded.filter((value) => value !== id)
-	emit(host, "hycn-toggle", { expanded: nextOpen, id })
+	dispatch(host, "hycn-toggle", {
+		bubbles: true,
+		composed: true,
+		detail: { expanded: nextOpen, id },
+	})
 }
 
 function select(host: Host, item: TreeItem) {
 	if (item.disabled) return
 	host.selectedId = item.id
 	host.activeId = item.id
-	emit(host, "hycn-change", { id: item.id, label: item.label })
+	dispatch(host, "hycn-change", {
+		bubbles: true,
+		composed: true,
+		detail: { id: item.id, label: item.label },
+	})
 }
 
-function onClick(host: Host, event?: Event) {
-	if (!event) return
+function onClick(host: Host, event: Event) {
 	const row = eventElement(event, (element) => element.dataset.treeId !== undefined)
 	if (!row) return
 	const id = row.dataset.treeId ?? ""
-	const item = visibleItems(host.items, host.expanded).find((entry) => entry.id === id)
+	const item = host.visibleItems.find((entry) => entry.id === id)
 	if (!item) return
 	if (eventElement(event, (element) => element.dataset.toggle !== undefined)) toggle(host, id)
 	else select(host, item)
 }
 
-function onKeyDown(host: Host, event?: Event) {
-	if (!(event instanceof KeyboardEvent)) return
+function onKeyDown(host: Host, event: KeyboardEvent) {
 	const row = eventElement(event, (element) => element.dataset.treeId !== undefined)
 	if (!row) return
-	const items = visibleItems(host.items, host.expanded)
+	const items = host.visibleItems
 	const current = items.findIndex((item) => item.id === row.dataset.treeId)
 	const item = items[current]
 	if (!item) return
@@ -88,10 +126,12 @@ function onKeyDown(host: Host, event?: Event) {
 	else if (event.key === "Home") next = 0
 	else if (event.key === "End") next = items.length - 1
 	else if (event.key === "ArrowRight") {
+		event.preventDefault()
 		if (item.children?.length && !host.expanded.includes(item.id)) toggle(host, item.id, true)
 		else if (item.children?.length) focusItem(host, item.children[0]?.id ?? item.id)
 		return
 	} else if (event.key === "ArrowLeft") {
+		event.preventDefault()
 		if (item.children?.length && host.expanded.includes(item.id)) toggle(host, item.id, false)
 		else if (item.parentId) focusItem(host, item.parentId)
 		return
@@ -107,17 +147,22 @@ function onKeyDown(host: Host, event?: Event) {
 
 export const component: Type["Component"] = {
 	tag: "hycn-tree",
+	activeElement: ({ activeId, render }) =>
+		render().querySelector<HTMLElement>(`[data-tree-id="${CSS.escape(activeId)}"]`),
 	activeId: "",
 	expanded: { value: [] as string[] },
 	items: { value: [] as TreeItem[] },
 	label: "Tree",
 	selectedId: { value: "", reflect: true },
+	visibleItems: {
+		value: ({ expanded, items }) => flatten(items, expanded),
+		observe: normalizeActive,
+	},
 	render: (host) => {
-		const items = visibleItems(host.items, host.expanded)
-		const activeId = host.activeId || items[0]?.id || ""
+		const activeId = resolvedActiveId(host)
 		return html`
 			<div aria-label="${host.label}" onkeydown="${onKeyDown}" part="tree" role="tree">
-				${items.map((item) =>
+				${host.visibleItems.map((item) =>
 					html`
 						<div
 							aria-disabled="${item.disabled ? "true" : undefined}"

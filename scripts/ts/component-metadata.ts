@@ -1,16 +1,20 @@
 type ApiItem = Record<string, unknown>
 
-interface ComponentMetadata {
+export interface MemberItem extends ApiItem {
+	attributeName?: string
+}
+
+export interface ComponentMetadata {
 	cssParts?: ApiItem[]
 	cssProperties?: ApiItem[]
 	description: string
 	events?: ApiItem[]
-	members?: ApiItem[]
+	members?: MemberItem[]
 	slots?: ApiItem[]
 }
 
 const field = (name: string, type: string, attribute?: string, defaultValue?: string) => ({
-	attribute,
+	attributeName: attribute,
 	default: defaultValue,
 	kind: "field",
 	name,
@@ -97,7 +101,11 @@ export const componentMetadata: Record<string, ComponentMetadata> = {
 		],
 		events: [event("hycn-select", "{ value: string }", "Emitted when a menu item is selected.")],
 		slots: [slot("trigger", "Button that controls the menu."), slot("", "Menu items.")],
-		cssParts: [part("menu", "Popup menu surface.")],
+		cssParts: [
+			part("trigger", "Trigger positioning wrapper."),
+			part("backdrop", "Outside-interaction dismissal surface."),
+			part("menu", "Popup menu surface."),
+		],
 		cssProperties: [
 			cssProperty("--hycn-menu-background", "Popup background."),
 			cssProperty("--hycn-menu-border", "Popup border color."),
