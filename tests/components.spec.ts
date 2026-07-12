@@ -184,7 +184,7 @@ test("disclosure and popover expose state and restore trigger focus", async ({ p
 })
 
 test("tooltip describes focus and toast announces and dismisses messages", async ({ page }) => {
-	await page.getByRole("button", { name: "Save" }).focus()
+	await page.locator("#overlay-fixture").getByRole("button", { name: "Save" }).focus()
 	await expect(page.getByRole("tooltip", { name: "Save your changes" })).toBeVisible()
 
 	await page.getByRole("button", { name: "Show notification" }).click()
