@@ -7,6 +7,10 @@ HYCN publishes unbundled standard ES modules, TypeScript declarations, a Custom 
 ## Components
 
 - `hycn-accordion` — progressive native disclosures with optional exclusive expansion
+- `hycn-checkbox` — form-associated checkbox with indeterminate state
+- `hycn-radio-group` — typed, form-associated single-choice options
+- `hycn-slider` — form-associated numeric range input
+- `hycn-switch` — form-associated binary switch
 - `hycn-dialog` — modal focus management, cancellation, dismissal, and restoration
 - `hycn-tabs` — automatic or manual activation with horizontal and vertical navigation
 - `hycn-menu` — trigger coordination, popup focus, selection, and outside dismissal

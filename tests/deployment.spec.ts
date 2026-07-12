@@ -7,6 +7,10 @@ test("production component book registers and runs interactive components", asyn
 		page.locator("details").filter({ hasText: "Can more than one section open?" }),
 	).toHaveAttribute("open", "")
 
+	await page.goto("/build/?story=components--checkbox--default")
+	await page.getByRole("checkbox", { name: "Email updates" }).click()
+	await expect(page.getByRole("checkbox", { name: "Email updates" })).toBeChecked()
+
 	await page.goto("/build/?story=components--dialog--default")
 
 	await expect

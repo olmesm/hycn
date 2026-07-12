@@ -25,9 +25,13 @@ const requiredFiles = [
 	"./dist/custom-elements.d.ts",
 	...[
 		"hycn-accordion",
+		"hycn-checkbox",
 		"hycn-combobox",
 		"hycn-dialog",
 		"hycn-menu",
+		"hycn-radio-group",
+		"hycn-slider",
+		"hycn-switch",
 		"hycn-tabs",
 		"hycn-tree",
 		"hycn-visually-hidden",

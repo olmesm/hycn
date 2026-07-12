@@ -48,6 +48,92 @@ export const componentMetadata: Record<string, ComponentMetadata> = {
 		slots: [slot("", "Direct child details disclosure elements.")],
 		cssProperties: [cssProperty("--hycn-accordion-border", "Divider color between items.")],
 	},
+	"hycn-checkbox": {
+		description: "A form-associated checkbox with checked and indeterminate states.",
+		members: [
+			field("checked", "boolean", "checked", "false"),
+			field("indeterminate", "boolean", "indeterminate", "false"),
+			field("disabled", "boolean", "disabled", "false"),
+			field("required", "boolean", "required", "false"),
+			field("value", "string", "value", '"on"'),
+			field("label", "string", "label", '"Checkbox"'),
+		],
+		events: [
+			event(
+				"hycn-change",
+				"{ checked: boolean; value: string }",
+				"Emitted when checked state changes.",
+			),
+		],
+		slots: [slot("", "Checkbox label content.")],
+		cssParts: [
+			part("control", "Native checkbox input."),
+			part("label", "Label wrapper."),
+			part("text", "Label text."),
+		],
+	},
+	"hycn-radio-group": {
+		description: "A form-associated single-choice radio group.",
+		members: [
+			field("options", "RadioOption[]", undefined, "[]"),
+			field("value", "string", "value", '""'),
+			field("label", "string", "label", '"Choose an option"'),
+			field("orientation", '"horizontal" | "vertical"', "orientation", '"vertical"'),
+			field("disabled", "boolean", "disabled", "false"),
+			field("required", "boolean", "required", "false"),
+		],
+		events: [event("hycn-change", "{ value: string }", "Emitted when the selected value changes.")],
+		cssParts: [
+			part("group", "Radio fieldset."),
+			part("label", "Group legend."),
+			part("option", "Option label."),
+		],
+	},
+	"hycn-slider": {
+		description: "A form-associated numeric range control.",
+		members: [
+			field("value", "number", "value", "0"),
+			field("min", "number", "min", "0"),
+			field("max", "number", "max", "100"),
+			field("step", "number", "step", "1"),
+			field("disabled", "boolean", "disabled", "false"),
+			field("label", "string", "label", '"Value"'),
+		],
+		events: [
+			event("hycn-input", "{ value: number }", "Emitted during value input."),
+			event("hycn-change", "{ value: number }", "Emitted after value commitment."),
+		],
+		slots: [slot("", "Slider label content.")],
+		cssParts: [
+			part("control", "Native range input."),
+			part("label", "Label wrapper."),
+			part("output", "Current value output."),
+			part("text", "Label text."),
+		],
+	},
+	"hycn-switch": {
+		description: "A form-associated binary switch.",
+		members: [
+			field("checked", "boolean", "checked", "false"),
+			field("disabled", "boolean", "disabled", "false"),
+			field("required", "boolean", "required", "false"),
+			field("value", "string", "value", '"on"'),
+			field("label", "string", "label", '"Switch"'),
+		],
+		events: [
+			event(
+				"hycn-change",
+				"{ checked: boolean; value: string }",
+				"Emitted when switch state changes.",
+			),
+		],
+		slots: [slot("", "Switch label content.")],
+		cssParts: [
+			part("control", "Native checkbox with switch role."),
+			part("label", "Label wrapper."),
+			part("text", "Label text."),
+		],
+	},
 	"hycn-combobox": {
 		description: "An editable combobox with filtered listbox options and keyboard selection.",
 		members: [

@@ -5,25 +5,25 @@ HYCN uses the canonical component research pages in the [Open UI repository](htt
 ## Implemented
 
 - [x] Accordion
+- [x] Checkbox
 - [x] Combobox
 - [x] Dialog
 - [x] Menu
+- [x] Radio group
+- [x] Slider
+- [x] Switch
 - [x] Tabs
 - [x] Tree view (listed in the [component matrix](https://open-ui.org/research/component-matrix/))
 
 ## Interactive primitives remaining
 
 - [ ] Carousel
-- [ ] Checkbox
 - [ ] Date picker
 - [ ] Disclosure
 - [ ] File input
 - [ ] Number input
 - [ ] Popover / popup
-- [ ] Radio group
 - [ ] Select
-- [ ] Slider
-- [ ] Switch
 - [ ] Toast
 - [ ] Tooltip
 

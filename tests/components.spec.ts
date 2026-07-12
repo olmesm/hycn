@@ -42,9 +42,13 @@ test("registers every public component", async ({ page }) => {
 			page.evaluate(() =>
 				[
 					"hycn-accordion",
+					"hycn-checkbox",
 					"hycn-dialog",
 					"hycn-tabs",
 					"hycn-menu",
+					"hycn-radio-group",
+					"hycn-slider",
+					"hycn-switch",
 					"hycn-combobox",
 					"hycn-tree",
 					"hycn-visually-hidden",
@@ -52,6 +56,37 @@ test("registers every public component", async ({ page }) => {
 			),
 		)
 		.toBe(true)
+})
+
+test("form controls submit, validate, emit changes, and reset", async ({ page }) => {
+	const checkbox = page.getByRole("checkbox", { name: "Email updates" })
+	const switchControl = page.getByRole("switch", { name: "Dark mode" })
+	const medium = page.getByRole("radio", { name: "Medium" })
+	const slider = page.getByRole("slider", { name: "Volume" })
+
+	await checkbox.click()
+	await switchControl.click()
+	await medium.click()
+	await slider.focus()
+	await page.keyboard.press("ArrowRight")
+
+	await expect(checkbox).toBeChecked()
+	await expect(switchControl).toBeChecked()
+	await expect(medium).toBeChecked()
+	await expect(slider).toHaveValue("41")
+	await expect
+		.poll(() =>
+			page
+				.locator("#control-form")
+				.evaluate((form: HTMLFormElement) => Object.fromEntries(new FormData(form))),
+		)
+		.toEqual({ size: "m", theme: "dark", updates: "yes", volume: "41" })
+
+	await page.getByRole("button", { name: "Reset controls" }).click()
+	await expect(checkbox).not.toBeChecked()
+	await expect(switchControl).not.toBeChecked()
+	await expect(page.getByRole("radio", { name: "Small" })).not.toBeChecked()
+	await expect(slider).toHaveValue("40")
 })
 
 test("accordion coordinates exclusive disclosure state and emits toggle details", async ({

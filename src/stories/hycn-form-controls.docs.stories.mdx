@@ -1,0 +1,16 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Form Controls" />
+
+# Form controls
+
+`hycn-checkbox`, `hycn-switch`, `hycn-radio-group`, and `hycn-slider` are form-associated custom elements backed by native inputs. They submit under the custom element's `name`, participate in constraint validation and fieldset disabling, and restore their initial value on form reset.
+
+```html
+<hycn-checkbox name="updates" value="yes">Email updates</hycn-checkbox>
+<hycn-switch name="theme" value="dark">Dark mode</hycn-switch>
+<hycn-radio-group name="size" label="Size"></hycn-radio-group>
+<hycn-slider name="volume" label="Volume" min="0" max="100"></hycn-slider>
+```
+
+Checkbox and Switch emit `hycn-change` with `{ checked, value }`. Radio Group emits `hycn-change` with `{ value }`. Slider emits `hycn-input` and `hycn-change` with `{ value }`. Native keyboard behavior is preserved.

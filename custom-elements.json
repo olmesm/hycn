@@ -84,6 +84,154 @@
     },
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-checkbox.js",
+      "declarations": [
+        {
+          "description": "A form-associated checkbox with checked and indeterminate states.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"on\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Checkbox\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when checked state changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ checked: boolean; value: string }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Checkbox label content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native checkbox input.",
+              "name": "control"
+            },
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "checked",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "indeterminate",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnCheckbox",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-checkbox"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnCheckbox"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-checkbox"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-combobox.js",
       "declarations": [
         {
@@ -504,6 +652,433 @@
           },
           "kind": "custom-element-definition",
           "name": "hycn-menu"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-radio-group.js",
+      "declarations": [
+        {
+          "description": "A form-associated single-choice radio group.",
+          "members": [
+            {
+              "default": "[]",
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "RadioOption[]"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Choose an option\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"vertical\"",
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the selected value changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Radio fieldset.",
+              "name": "group"
+            },
+            {
+              "description": "Group legend.",
+              "name": "label"
+            },
+            {
+              "description": "Option label.",
+              "name": "option"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "orientation",
+              "name": "orientation",
+              "type": {
+                "text": "\"horizontal\" | \"vertical\""
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnRadioGroup",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-radio-group"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnRadioGroup"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-radio-group"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-slider.js",
+      "declarations": [
+        {
+          "description": "A form-associated numeric range control.",
+          "members": [
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "100",
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "1",
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"Value\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted during value input.",
+              "name": "hycn-input",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              }
+            },
+            {
+              "description": "Emitted after value commitment.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Slider label content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native range input.",
+              "name": "control"
+            },
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Current value output.",
+              "name": "output"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "min",
+              "name": "min",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "max",
+              "name": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "step",
+              "name": "step",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnSlider",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-slider"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnSlider"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-slider"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-switch.js",
+      "declarations": [
+        {
+          "description": "A form-associated binary switch.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"on\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Switch\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when switch state changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ checked: boolean; value: string }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Switch label content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native checkbox with switch role.",
+              "name": "control"
+            },
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "checked",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnSwitch",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-switch"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnSwitch"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-switch"
         }
       ]
     },
