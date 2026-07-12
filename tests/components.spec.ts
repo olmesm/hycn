@@ -42,13 +42,37 @@ test("registers every public component", async ({ page }) => {
 			page.evaluate(() =>
 				[
 					"hycn-accordion",
+					"hycn-alert",
+					"hycn-avatar",
+					"hycn-badge",
+					"hycn-breadcrumb",
+					"hycn-button",
+					"hycn-card",
+					"hycn-carousel",
 					"hycn-checkbox",
+					"hycn-date-picker",
 					"hycn-dialog",
+					"hycn-disclosure",
+					"hycn-file-input",
+					"hycn-flex",
+					"hycn-icon",
+					"hycn-image",
+					"hycn-list",
 					"hycn-tabs",
 					"hycn-menu",
+					"hycn-popover",
+					"hycn-number-input",
 					"hycn-radio-group",
+					"hycn-select",
+					"hycn-skeleton",
 					"hycn-slider",
 					"hycn-switch",
+					"hycn-table",
+					"hycn-tag",
+					"hycn-text",
+					"hycn-text-input",
+					"hycn-toast",
+					"hycn-tooltip",
 					"hycn-combobox",
 					"hycn-tree",
 					"hycn-visually-hidden",
@@ -56,6 +80,64 @@ test("registers every public component", async ({ page }) => {
 			),
 		)
 		.toBe(true)
+})
+
+test("native inputs submit, validate, emit changes, and reset", async ({ page }) => {
+	const form = page.locator("#native-input-form")
+	const name = page.getByRole("textbox", { name: "Full name" })
+	const guests = page.getByRole("spinbutton", { name: "Guests" })
+	const date = page.getByLabel("Arrival")
+	const country = form.getByRole("combobox", { name: "Native country" })
+	const file = page.getByLabel("Attachment")
+
+	await name.fill("Grace")
+	await guests.fill("3")
+	await date.fill("2026-08-01")
+	await country.selectOption("es")
+	await file.setInputFiles({
+		name: "notes.txt",
+		mimeType: "text/plain",
+		buffer: Buffer.from("HYCN"),
+	})
+
+	await expect
+		.poll(() =>
+			form.evaluate((element: HTMLFormElement) => {
+				const data = new FormData(element)
+				return {
+					arrival: data.get("arrival"),
+					country: data.get("country"),
+					file: (data.get("attachment") as File | null)?.name,
+					fullName: data.get("fullName"),
+					guests: data.get("guests"),
+				}
+			}),
+		)
+		.toEqual({
+			arrival: "2026-08-01",
+			country: "es",
+			file: "notes.txt",
+			fullName: "Grace",
+			guests: "3",
+		})
+
+	await page.getByRole("button", { name: "Reset native inputs" }).click()
+	await expect(name).toHaveValue("Ada")
+	await expect(guests).toHaveValue("2")
+	await expect(date).toHaveValue("2026-07-12")
+	await expect(country).toHaveValue("")
+	await expect(file).toHaveValue("")
+})
+
+test("carousel exposes one slide at a time and navigates in both directions", async ({ page }) => {
+	const carousel = page.locator("hycn-carousel")
+	await expect(page.getByRole("group", { name: "1 of 3" })).toBeVisible()
+	await expect(page.getByRole("group", { name: "2 of 3" })).toBeHidden()
+	await page.getByRole("button", { name: "Next slide" }).click()
+	await expect(page.getByRole("group", { name: "2 of 3" })).toBeVisible()
+	await expect(carousel).toHaveAttribute("selected-index", "1")
+	await page.getByRole("button", { name: "Previous slide" }).click()
+	await expect(page.getByRole("group", { name: "1 of 3" })).toBeVisible()
 })
 
 test("form controls submit, validate, emit changes, and reset", async ({ page }) => {
@@ -87,6 +169,29 @@ test("form controls submit, validate, emit changes, and reset", async ({ page })
 	await expect(switchControl).not.toBeChecked()
 	await expect(page.getByRole("radio", { name: "Small" })).not.toBeChecked()
 	await expect(slider).toHaveValue("40")
+})
+
+test("disclosure and popover expose state and restore trigger focus", async ({ page }) => {
+	await page.getByRole("button", { name: "Show details" }).click()
+	await expect(page.getByText("Disclosure content", { exact: true })).toBeVisible()
+
+	const trigger = page.getByRole("button", { name: "Profile" })
+	await trigger.click()
+	await expect(page.getByRole("dialog", { name: "Profile details" })).toBeVisible()
+	await page.getByRole("dialog", { name: "Profile details" }).press("Escape")
+	await expect(page.getByRole("dialog", { name: "Profile details" })).toBeHidden()
+	await expect(trigger).toBeFocused()
+})
+
+test("tooltip describes focus and toast announces and dismisses messages", async ({ page }) => {
+	await page.getByRole("button", { name: "Save" }).focus()
+	await expect(page.getByRole("tooltip", { name: "Save your changes" })).toBeVisible()
+
+	await page.getByRole("button", { name: "Show notification" }).click()
+	const notification = page.locator("[role='status']").filter({ hasText: "Changes saved" })
+	await expect(notification).toBeVisible()
+	await page.getByRole("button", { name: "Dismiss notification" }).click()
+	await expect(notification).toBeHidden()
 })
 
 test("accordion coordinates exclusive disclosure state and emits toggle details", async ({
@@ -380,7 +485,7 @@ test("combobox filters, emits input, and selects with the keyboard", async ({ pa
 			Reflect.set(globalThis, "comboboxChangeDetail", (event as CustomEvent).detail)
 		})
 	})
-	const input = page.getByRole("combobox", { name: "Country" })
+	const input = page.getByRole("combobox", { name: "Country", exact: true })
 	await input.fill("spa")
 	await expect
 		.poll(() => page.evaluate(() => Reflect.get(globalThis, "comboboxInputDetail")))
@@ -401,7 +506,7 @@ test("combobox filters, emits input, and selects with the keyboard", async ({ pa
 
 test("combobox closes on blur and never exposes a dangling active descendant", async ({ page }) => {
 	const host = page.locator("hycn-combobox")
-	const input = page.getByRole("combobox", { name: "Country" })
+	const input = page.getByRole("combobox", { name: "Country", exact: true })
 	await input.focus()
 	await expect(input).toHaveAttribute("aria-expanded", "true")
 	await page.getByRole("button", { name: "Outside target" }).focus()
@@ -416,7 +521,7 @@ test("combobox closes on blur and never exposes a dangling active descendant", a
 
 test("combobox synchronizes displayed text when value changes externally", async ({ page }) => {
 	const host = page.locator("hycn-combobox")
-	const input = page.getByRole("combobox", { name: "Country" })
+	const input = page.getByRole("combobox", { name: "Country", exact: true })
 	await host.evaluate((element: HTMLElementTagNameMap["hycn-combobox"]) => {
 		element.value = "fr"
 	})
@@ -431,7 +536,7 @@ test("combobox reconciles a controlled value when asynchronous options arrive or
 	page,
 }) => {
 	const host = page.locator("hycn-combobox")
-	const input = page.getByRole("combobox", { name: "Country" })
+	const input = page.getByRole("combobox", { name: "Country", exact: true })
 	await host.evaluate((element: HTMLElementTagNameMap["hycn-combobox"]) => {
 		element.options = []
 		element.value = "fr"

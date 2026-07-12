@@ -55,6 +55,53 @@
 				</form>
 			</section>
 
+			<section class="fixture" id="overlay-fixture">
+				<h2>Disclosure and overlays</h2>
+				<hycn-disclosure><span slot="trigger">Show details</span><p>Disclosure content</p></hycn-disclosure>
+				<hycn-popover label="Profile details"><button slot="trigger" type="button">Profile</button><p>Popover content</p></hycn-popover>
+				<hycn-tooltip delay="0"><button slot="trigger" type="button">Save</button>Save your changes</hycn-tooltip>
+				<button id="show-toast" type="button">Show notification</button>
+				<hycn-toast duration="0"></hycn-toast>
+			</section>
+
+			<section class="fixture" id="native-inputs-fixture">
+				<h2>Native inputs</h2>
+				<form id="native-input-form">
+					<hycn-text-input label="Full name" name="fullName" required value="Ada"></hycn-text-input>
+					<hycn-number-input label="Guests" min="1" name="guests" value="2"></hycn-number-input>
+					<hycn-date-picker label="Arrival" name="arrival" value="2026-07-12"></hycn-date-picker>
+					<hycn-select label="Native country" name="country" placeholder="Choose a country" required></hycn-select>
+					<hycn-file-input label="Attachment" name="attachment"></hycn-file-input>
+					<button type="reset">Reset native inputs</button>
+				</form>
+			</section>
+
+			<section class="fixture" id="carousel-fixture">
+				<h2>Carousel</h2>
+				<hycn-carousel label="Featured projects" loop>
+					<div slot="slide"><h3>First project</h3><p>Native semantics.</p></div>
+					<div slot="slide"><h3>Second project</h3><p>Typed APIs.</p></div>
+					<div slot="slide"><h3>Third project</h3><p>Browser tested.</p></div>
+				</hycn-carousel>
+			</section>
+
+			<section class="fixture" id="primitives-fixture">
+				<h2>Presentational primitives</h2>
+				<hycn-alert>Saved successfully</hycn-alert>
+				<hycn-flex align="center" gap=".5rem">
+					<hycn-avatar alt="Ada Lovelace" initials="AL"></hycn-avatar>
+					<hycn-text weight="bold">Ada Lovelace</hycn-text>
+					<hycn-badge>Admin</hycn-badge><hycn-tag>Maths</hycn-tag>
+				</hycn-flex>
+				<hycn-breadcrumb><a href="#home">Home</a> / <a href="#people">People</a> / Ada</hycn-breadcrumb>
+				<hycn-card><h3>Analytical Engine</h3><p>Card content</p><hycn-button>Read more</hycn-button></hycn-card>
+				<hycn-list><li>Accessible</li><li>Composable</li></hycn-list>
+				<hycn-icon label="Success">✓</hycn-icon>
+				<hycn-image alt="Blue placeholder" height="45" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='45'%3E%3Crect width='100%25' height='100%25' fill='%236b8afd'/%3E%3C/svg%3E" width="80"></hycn-image>
+				<hycn-skeleton label="Loading profile"></hycn-skeleton>
+				<hycn-table label="Project status"><table><thead><tr><th>Project</th><th>Status</th></tr></thead><tbody><tr><td>HYCN</td><td>Active</td></tr></tbody></table></hycn-table>
+			</section>
+
 			<section class="fixture">
 				<h2>Tabs</h2>
 				<hycn-tabs>
@@ -103,13 +150,23 @@
 
 			await Promise.all([
 				"hycn-accordion",
+				"hycn-alert", "hycn-avatar", "hycn-badge", "hycn-breadcrumb", "hycn-button",
+				"hycn-card", "hycn-carousel",
 				"hycn-checkbox",
+				"hycn-date-picker", "hycn-file-input", "hycn-flex", "hycn-icon", "hycn-image", "hycn-list",
 				"hycn-dialog",
+				"hycn-disclosure",
 				"hycn-tabs",
 				"hycn-menu",
+				"hycn-popover",
+				"hycn-number-input",
 				"hycn-radio-group",
 				"hycn-slider",
+				"hycn-select", "hycn-skeleton",
 				"hycn-switch",
+				"hycn-table", "hycn-tag", "hycn-text", "hycn-text-input",
+				"hycn-toast",
+				"hycn-tooltip",
 				"hycn-combobox",
 				"hycn-tree",
 			].map((tag) => customElements.whenDefined(tag)))
@@ -139,6 +196,15 @@
 				{ label: "Medium", value: "m" },
 				{ disabled: true, label: "Large", value: "l" },
 			]
+
+			document.querySelector("hycn-select").options = [
+				{ label: "France", value: "fr" },
+				{ label: "Spain", value: "es" },
+			]
+
+			document.querySelector("#show-toast").addEventListener("click", () => {
+				document.querySelector("hycn-toast").show("Changes saved")
+			})
 		</script>
 	</body>
 </html>

@@ -7,15 +7,25 @@ HYCN publishes unbundled standard ES modules, TypeScript declarations, a Custom 
 ## Components
 
 - `hycn-accordion` — progressive native disclosures with optional exclusive expansion
+- `hycn-alert`, `hycn-toast` — inline and queued live-region notifications
+- `hycn-avatar`, `hycn-badge`, `hycn-tag` — compact identity and status primitives
+- `hycn-breadcrumb`, `hycn-list`, `hycn-table` — semantic navigation and data structures
+- `hycn-button`, `hycn-card`, `hycn-flex`, `hycn-text` — composition and layout primitives
+- `hycn-carousel` — labelled slides with previous/next navigation and optional looping
 - `hycn-checkbox` — form-associated checkbox with indeterminate state
 - `hycn-radio-group` — typed, form-associated single-choice options
 - `hycn-slider` — form-associated numeric range input
 - `hycn-switch` — form-associated binary switch
 - `hycn-dialog` — modal focus management, cancellation, dismissal, and restoration
+- `hycn-disclosure` — button-controlled expandable content
 - `hycn-tabs` — automatic or manual activation with horizontal and vertical navigation
 - `hycn-menu` — trigger coordination, popup focus, selection, and outside dismissal
+- `hycn-popover` — generic anchored popup content with dismissal
 - `hycn-combobox` — typed filtering, active option management, and selection
+- `hycn-date-picker`, `hycn-file-input`, `hycn-number-input`, `hycn-select`, `hycn-text-input` — native, form-associated inputs
+- `hycn-icon`, `hycn-image`, `hycn-skeleton` — accessible visual and loading primitives
 - `hycn-tree` — hierarchical expansion, traversal, and selection
+- `hycn-tooltip` — hover and focus descriptions for slotted triggers
 - `hycn-visually-hidden` — visually hidden accessible content
 
 `simple-counter` remains as the small Hybrids authoring example.

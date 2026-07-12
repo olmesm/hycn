@@ -84,6 +84,434 @@
     },
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-alert.js",
+      "declarations": [
+        {
+          "description": "An assertive or polite live-region alert.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "\"assertive\" | \"polite\""
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Alert content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Alert container.",
+              "name": "base"
+            }
+          ],
+          "attributes": [],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnAlert",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-alert"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnAlert"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-alert"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-avatar.js",
+      "declarations": [
+        {
+          "description": "A person or entity image with an initials fallback.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "initials",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Fallback content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Avatar frame.",
+              "name": "base"
+            },
+            {
+              "description": "Avatar image.",
+              "name": "image"
+            },
+            {
+              "description": "Fallback content.",
+              "name": "fallback"
+            }
+          ],
+          "attributes": [],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnAvatar",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-avatar"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnAvatar"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-avatar"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-badge.js",
+      "declarations": [
+        {
+          "description": "A compact status or count label.",
+          "slots": [
+            {
+              "description": "Badge content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Badge surface.",
+              "name": "base"
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnBadge",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-badge"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnBadge"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-badge"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-breadcrumb.js",
+      "declarations": [
+        {
+          "description": "A labelled breadcrumb navigation landmark.",
+          "members": [
+            {
+              "default": "\"Breadcrumb\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Breadcrumb links and separators.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Navigation landmark.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnBreadcrumb",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-breadcrumb"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnBreadcrumb"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-breadcrumb"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-button.js",
+      "declarations": [
+        {
+          "description": "A native button wrapper.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"button\"",
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"button\" | \"reset\" | \"submit\""
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Button label.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native button.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "type",
+              "name": "type",
+              "type": {
+                "text": "\"button\" | \"reset\" | \"submit\""
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnButton",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-button"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnButton"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-button"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-card.js",
+      "declarations": [
+        {
+          "description": "A grouped article surface.",
+          "slots": [
+            {
+              "description": "Card content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Card article.",
+              "name": "base"
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnCard",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-card"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnCard"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-card"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-carousel.js",
+      "declarations": [
+        {
+          "description": "A labelled carousel with previous and next controls.",
+          "members": [
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "selectedIndex",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "loop",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"Carousel\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted after slide selection changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ index: number }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Carousel slides.",
+              "name": "slide"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Carousel region.",
+              "name": "base"
+            },
+            {
+              "description": "Slide viewport.",
+              "name": "slides"
+            },
+            {
+              "description": "Navigation controls.",
+              "name": "controls"
+            },
+            {
+              "description": "Previous button.",
+              "name": "previous"
+            },
+            {
+              "description": "Next button.",
+              "name": "next"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "selectedIndex",
+              "name": "selected-index",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "loop",
+              "name": "loop",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnCarousel",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-carousel"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnCarousel"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-carousel"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-checkbox.js",
       "declarations": [
         {
@@ -396,6 +824,148 @@
     },
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-date-picker.js",
+      "declarations": [
+        {
+          "description": "A form-associated native date picker.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Date\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when the date changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            },
+            {
+              "description": "Native date input.",
+              "name": "control"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "min",
+              "name": "min",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "max",
+              "name": "max",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnDatePicker",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-date-picker"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnDatePicker"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-date-picker"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-dialog.js",
       "declarations": [
         {
@@ -547,6 +1117,549 @@
     },
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-disclosure.js",
+      "declarations": [
+        {
+          "description": "A button-controlled disclosure panel.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"Details\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted after disclosure state changes.",
+              "name": "hycn-toggle",
+              "type": {
+                "text": "CustomEvent<{ expanded: boolean }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Disclosure button content.",
+              "name": "trigger"
+            },
+            {
+              "description": "Expandable panel content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Disclosure button.",
+              "name": "trigger"
+            },
+            {
+              "description": "Expandable content panel.",
+              "name": "panel"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnDisclosure",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-disclosure"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnDisclosure"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-disclosure"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-file-input.js",
+      "declarations": [
+        {
+          "description": "A form-associated native file chooser.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"Choose a file\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "FileList | null"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when selected files change.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ files: FileList | null }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            },
+            {
+              "description": "Native file input.",
+              "name": "control"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "accept",
+              "name": "accept",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "multiple",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnFileInput",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-file-input"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnFileInput"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-file-input"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-flex.js",
+      "declarations": [
+        {
+          "description": "A configurable flex layout primitive.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"column\" | \"row\""
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "justify",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Flex items.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Flex container.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "wrap",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnFlex",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-flex"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnFlex"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-flex"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-icon.js",
+      "declarations": [
+        {
+          "description": "A decorative or labelled icon container.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Icon graphic.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Icon container.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnIcon",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-icon"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnIcon"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-icon"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-image.js",
+      "declarations": [
+        {
+          "description": "A responsive native image wrapper.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"lazy\"",
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "\"eager\" | \"lazy\""
+              }
+            },
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native image.",
+              "name": "image"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "src",
+              "name": "src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "alt",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "loading",
+              "name": "loading",
+              "type": {
+                "text": "\"eager\" | \"lazy\""
+              }
+            },
+            {
+              "fieldName": "width",
+              "name": "width",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "height",
+              "name": "height",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnImage",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-image"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnImage"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-image"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-list.js",
+      "declarations": [
+        {
+          "description": "An ordered or unordered semantic list.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "ordered",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "List items.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Native list.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "ordered",
+              "name": "ordered",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnList",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-list"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnList"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-list"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-menu.js",
       "declarations": [
         {
@@ -652,6 +1765,270 @@
           },
           "kind": "custom-element-definition",
           "name": "hycn-menu"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-number-input.js",
+      "declarations": [
+        {
+          "description": "A form-associated native number input.",
+          "members": [
+            {
+              "default": "0",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "1",
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "default": "\"Number\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted during input.",
+              "name": "hycn-input",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              }
+            },
+            {
+              "description": "Emitted after commitment.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            },
+            {
+              "description": "Native number input.",
+              "name": "control"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "min",
+              "name": "min",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "max",
+              "name": "max",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "step",
+              "name": "step",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnNumberInput",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-number-input"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnNumberInput"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-number-input"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-popover.js",
+      "declarations": [
+        {
+          "description": "A generic trigger-controlled anchored popup.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"Popover\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted after popup state changes.",
+              "name": "hycn-toggle",
+              "type": {
+                "text": "CustomEvent<{ open: boolean }>"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Popup trigger.",
+              "name": "trigger"
+            },
+            {
+              "description": "Popup content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Trigger wrapper.",
+              "name": "trigger"
+            },
+            {
+              "description": "Outside dismissal surface.",
+              "name": "backdrop"
+            },
+            {
+              "description": "Popup surface.",
+              "name": "popup"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Popup background.",
+              "name": "--hycn-popover-background"
+            },
+            {
+              "description": "Popup border color.",
+              "name": "--hycn-popover-border"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnPopover",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-popover"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnPopover"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-popover"
         }
       ]
     },
@@ -787,6 +2164,190 @@
           },
           "kind": "custom-element-definition",
           "name": "hycn-radio-group"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-select.js",
+      "declarations": [
+        {
+          "description": "A form-associated single-choice native select.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "SelectOption[]"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Choose an option\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when selection changes.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            },
+            {
+              "description": "Native select.",
+              "name": "control"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "placeholder",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnSelect",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-select"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnSelect"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-select"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-skeleton.js",
+      "declarations": [
+        {
+          "description": "A reduced-motion-aware loading placeholder.",
+          "members": [
+            {
+              "default": "\"Loading\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Placeholder surface.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnSkeleton",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-skeleton"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnSkeleton"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-skeleton"
         }
       ]
     },
@@ -1084,6 +2645,62 @@
     },
     {
       "kind": "javascript-module",
+      "path": "dist/components/hycn-table.js",
+      "declarations": [
+        {
+          "description": "A labelled scroll container for a semantic table.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "A native table.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Scrollable table region.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnTable",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-table"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTable"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-table"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "dist/components/hycn-tabs.js",
       "declarations": [
         {
@@ -1182,6 +2799,467 @@
           },
           "kind": "custom-element-definition",
           "name": "hycn-tabs"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-tag.js",
+      "declarations": [
+        {
+          "description": "A compact categorical label.",
+          "slots": [
+            {
+              "description": "Tag content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Tag surface.",
+              "name": "base"
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnTag",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-tag"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTag"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-tag"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-text-input.js",
+      "declarations": [
+        {
+          "description": "A form-associated native text input.",
+          "members": [
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"text\"",
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"email\" | \"password\" | \"search\" | \"tel\" | \"text\" | \"url\""
+              }
+            },
+            {
+              "default": "\"\"",
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "\"Text\"",
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted during input.",
+              "name": "hycn-input",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            },
+            {
+              "description": "Emitted after commitment.",
+              "name": "hycn-change",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "Label text.",
+              "name": "text"
+            },
+            {
+              "description": "Native text input.",
+              "name": "control"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "value",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "type",
+              "name": "type",
+              "type": {
+                "text": "\"email\" | \"password\" | \"search\" | \"tel\" | \"text\" | \"url\""
+              }
+            },
+            {
+              "fieldName": "placeholder",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "label",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "fieldName": "disabled",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "required",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnTextInput",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-text-input"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTextInput"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-text-input"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-text.js",
+      "declarations": [
+        {
+          "description": "An inline text styling primitive.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "muted",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "\"normal\"",
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "\"bold\" | \"normal\""
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Text content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Text span.",
+              "name": "base"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "muted",
+              "name": "muted",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "fieldName": "weight",
+              "name": "weight",
+              "type": {
+                "text": "\"bold\" | \"normal\""
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnText",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-text"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnText"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-text"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-toast.js",
+      "declarations": [
+        {
+          "description": "A live-region notification queue.",
+          "members": [
+            {
+              "default": "[]",
+              "kind": "field",
+              "name": "messages",
+              "type": {
+                "text": "ToastMessage[]"
+              }
+            },
+            {
+              "default": "5000",
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "parameters": [
+                {
+                  "name": "message",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "tone",
+                  "optional": true,
+                  "type": {
+                    "text": "\"assertive\" | \"polite\""
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "dismiss",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "Emitted when a notification is dismissed.",
+              "name": "hycn-dismiss",
+              "type": {
+                "text": "CustomEvent<{ id: string }>"
+              }
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Notification stack.",
+              "name": "region"
+            },
+            {
+              "description": "Notification surface.",
+              "name": "toast"
+            },
+            {
+              "description": "Notification message.",
+              "name": "message"
+            },
+            {
+              "description": "Dismiss button.",
+              "name": "dismiss"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Notification background.",
+              "name": "--hycn-toast-background"
+            },
+            {
+              "description": "Notification stack level.",
+              "name": "--hycn-toast-z-index"
+            }
+          ],
+          "attributes": [],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnToast",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-toast"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnToast"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-toast"
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/hycn-tooltip.js",
+      "declarations": [
+        {
+          "description": "A delayed hover and focus description.",
+          "members": [
+            {
+              "default": "false",
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "default": "300",
+              "kind": "field",
+              "name": "delay",
+              "type": {
+                "text": "number"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Element described by the tooltip.",
+              "name": "trigger"
+            },
+            {
+              "description": "Tooltip content.",
+              "name": ""
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "Trigger wrapper.",
+              "name": "trigger"
+            },
+            {
+              "description": "Tooltip surface.",
+              "name": "tooltip"
+            }
+          ],
+          "cssProperties": [
+            {
+              "description": "Tooltip background.",
+              "name": "--hycn-tooltip-background"
+            },
+            {
+              "description": "Tooltip foreground.",
+              "name": "--hycn-tooltip-color"
+            }
+          ],
+          "attributes": [
+            {
+              "fieldName": "open",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "customElement": true,
+          "kind": "class",
+          "name": "HycnTooltip",
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "hycn-tooltip"
+        }
+      ],
+      "exports": [
+        {
+          "declaration": {
+            "name": "HycnTooltip"
+          },
+          "kind": "custom-element-definition",
+          "name": "hycn-tooltip"
         }
       ]
     },

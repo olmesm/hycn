@@ -1,0 +1,9 @@
+import { Meta } from "@ladle/react"
+
+<Meta title="Documentation/Native Inputs" />
+
+# Native inputs
+
+`hycn-text-input`, `hycn-number-input`, `hycn-date-picker`, `hycn-select`, and `hycn-file-input` preserve native browser behavior while participating in forms through `ElementInternals`.
+
+All expose native controls through the `control` part, visible labels, disabled and required state, and bubbling `hycn-change` events. Text and number inputs also emit `hycn-input` during editing.
